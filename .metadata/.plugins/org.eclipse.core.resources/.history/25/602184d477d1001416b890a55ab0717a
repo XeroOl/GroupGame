@@ -4,5 +4,5 @@ import com.lasacsgames.game.graphics.Sprite;
 
 public abstract class Tile {
 
-	public Sprite sprite;
+	protected Sprite sprite;
 }
