@@ -7,10 +7,6 @@ public class Keyboard implements KeyListener{
 
 	private boolean[] keys = new boolean[200];
 	
-	public void update() {
-		
-	}
-	
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {

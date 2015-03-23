@@ -2,14 +2,11 @@ package com.lasacsgames.game;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.state.GameState;
 
@@ -23,7 +20,6 @@ public class Game extends Canvas implements Runnable {
 	private static boolean running = false;
 
 	private Keyboard key;
-	private Screen screen;
 
 	private GameState state;
 	private JFrame frame;
@@ -38,8 +34,6 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
-		
-		screen = new Screen(width, height);
 		
 		key = new Keyboard();
 		
@@ -63,41 +57,7 @@ public class Game extends Canvas implements Runnable {
 
 	@Override
 	public void run() {
-		final double ns = 1000000000.0;
-		final double MS_PER_UPDATE = 1.0 / 60.0;
-		double previous = System.nanoTime() / ns;
-		double lag = 0.0;
-		int updates = 0;
-		int frames = 0;
-		long timer = System.currentTimeMillis();
-		while (running)
-		{
-			double current = System.nanoTime() / ns;
-			double elapsed = current - previous;
-			previous = current;
-			lag += elapsed;
-
-			key.update();
-
-			while (lag >= MS_PER_UPDATE)
-			{
-				update();
-				updates++;
-				lag -= MS_PER_UPDATE;
-			}
-
-			render();
-			frames++;
-
-			if (System.currentTimeMillis() - timer > 1000)
-			{
-				timer += 1000;
-				frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
-				updates = 0;
-				frames = 0;
-			}
-
-		}
+		// TODO Auto-generated method stub
 	}
 
 	public void update() {
@@ -105,24 +65,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void render() {
-		BufferStrategy bs = getBufferStrategy();
-		if (bs == null)
-		{
-			createBufferStrategy(3);
-			return;
-		}
 
-		screen.clear();
-
-		for (int i = 0; i < pixels.length; i++)
-		{
-			pixels[i] = screen.pixels[i];
-		}
-
-		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		g.dispose();
-		bs.show();
 	}
 
 	public static void main(String[] args) {
