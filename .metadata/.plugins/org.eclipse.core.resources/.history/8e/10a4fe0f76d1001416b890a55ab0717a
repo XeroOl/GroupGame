@@ -9,18 +9,11 @@ public class Keyboard implements KeyListener {
 
 	private boolean[] keys = new boolean[200];
 
-	public static Key UP = new Key(KeyEvent.VK_W);
-	public static Key LEFT = new Key(KeyEvent.VK_A);
-	public static Key DOWN = new Key(KeyEvent.VK_S);
-	public static Key RIGHT = new Key(KeyEvent.VK_D);
-	public static Key ENTER = new Key(KeyEvent.VK_ENTER);
+	public static Key W = new Key(KeyEvent.VK_W);
+	public static Key A = new Key(KeyEvent.VK_A);
 
 	public void update() {
-		UP.update(keys);
-		LEFT.update(keys);
-		DOWN.update(keys);
-		RIGHT.update(keys);
-		ENTER.update(keys);
+		A.update(keys);
 	}
 
 	@Override
