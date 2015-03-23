@@ -63,7 +63,7 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	@Override
+	//@Override
 	public void run() {
 		final double ns = 1000000000.0;
 		final double MS_PER_UPDATE = 1.0 / 60.0;

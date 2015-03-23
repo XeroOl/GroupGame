@@ -23,19 +23,17 @@ public class Keyboard implements KeyListener {
 		ENTER.update(keys);
 	}
 
-	@Override
+
 	public void keyPressed(KeyEvent arg0) {
 		keys[arg0.getKeyCode()] = true;
 
 	}
 
-	@Override
 	public void keyReleased(KeyEvent arg0) {
 		keys[arg0.getKeyCode()] = false;
 
 	}
-
-	@Override
+	
 	public void keyTyped(KeyEvent arg0) {
 		// ODO Auto-generated method stub
 
