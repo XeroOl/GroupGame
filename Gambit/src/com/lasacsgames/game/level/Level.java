@@ -3,24 +3,24 @@ package com.lasacsgames.game.level;
 public abstract class Level {
 
 	protected int width, height;
-	protected int[] tiles;
+	protected int[][] tiles;
 
-	public Level(String path) {
-		load(path);
-		generateLevel();
+	public Level() {
+
 	}
 
-	public Level(int width, int height) {
+	public void setWidth(int width) {
 		this.width = width;
-		this.height = height;
-		generateLevel();
+		tiles = new int[width][height];
 	}
 
-	protected void load(String path) {
-
+	public void setHeight(int height) {
+		this.height=height;
+		tiles = new int[width][height];
 	}
-
-	protected void generateLevel() {
-
+	public void setDimension(int width, int height){
+		this.width = width;
+		this.height=height;
+		tiles = new int[width][height];
 	}
 }
