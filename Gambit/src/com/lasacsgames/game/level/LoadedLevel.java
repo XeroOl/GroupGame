@@ -7,7 +7,7 @@ public class LoadedLevel extends Level{
 	}
 	
 	protected void load(String path) {
-
+		//TODO Load from file
 	}
 
 }
