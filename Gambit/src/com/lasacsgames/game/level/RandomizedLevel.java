@@ -20,6 +20,24 @@ public class RandomizedLevel extends Level {
 	protected void generateLevel() {
 		// PLACEHOLDER GENERATOR, DO NOT ATTEMPT TO UNDERSTAND
 		int tilesleft = width * height / 2;
+		int x = r.nextInt(width);
+		int y = r.nextInt(height);
+		for (int i = 0; i < tilesleft; i++) {
+			tiles[x][y] = 0xFFFFFF;
+			int dir = r.nextInt(4);
+			if (dir == 0 && x != 0) {
+				x--;
+			}
+			if (dir == 1 && y != 0) {
+				y--;
+			}
+			if (dir == 2 && x < width - 1) {
+				x++;
+			}
+			if (dir == 3 && y < height - 1) {
+				y++;
+			}
+		}
 	}
 
 }
