@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.state.GameState;
-import com.lasacsgames.game.state.MenuState;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +40,7 @@ public class Game extends Canvas implements Runnable {
 		setPreferredSize(size);
 
 		screen = new Screen(width, height);
-		state = new MenuState();
+		//state = new GameState();
 
 		key = new Keyboard();
 
@@ -101,7 +100,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
-		state.update(this);
+		//state.update(this);
 	}
 
 	public void render() {

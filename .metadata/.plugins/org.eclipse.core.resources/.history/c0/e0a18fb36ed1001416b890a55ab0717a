@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.state.GameState;
-import com.lasacsgames.game.state.MenuState;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -39,12 +38,11 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
-
+		
 		screen = new Screen(width, height);
-		state = new MenuState();
-
+		
 		key = new Keyboard();
-
+		
 		addKeyListener(key);
 	}
 
@@ -72,7 +70,8 @@ public class Game extends Canvas implements Runnable {
 		int updates = 0;
 		int frames = 0;
 		long timer = System.currentTimeMillis();
-		while (running) {
+		while (running)
+		{
 			double current = System.nanoTime() / ns;
 			double elapsed = current - previous;
 			previous = current;
@@ -80,7 +79,8 @@ public class Game extends Canvas implements Runnable {
 
 			key.update();
 
-			while (lag >= MS_PER_UPDATE) {
+			while (lag >= MS_PER_UPDATE)
+			{
 				update();
 				updates++;
 				lag -= MS_PER_UPDATE;
@@ -89,10 +89,10 @@ public class Game extends Canvas implements Runnable {
 			render();
 			frames++;
 
-			if (System.currentTimeMillis() - timer > 1000) {
+			if (System.currentTimeMillis() - timer > 1000)
+			{
 				timer += 1000;
-				frame.setTitle(title + "  |  " + updates + " ups, " + frames
-						+ " fps");
+				frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
 				updates = 0;
 				frames = 0;
 			}
@@ -101,19 +101,21 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
-		state.update(this);
+
 	}
 
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
-		if (bs == null) {
+		if (bs == null)
+		{
 			createBufferStrategy(3);
 			return;
 		}
 
 		screen.clear();
 
-		for (int i = 0; i < pixels.length; i++) {
+		for (int i = 0; i < pixels.length; i++)
+		{
 			pixels[i] = screen.pixels[i];
 		}
 

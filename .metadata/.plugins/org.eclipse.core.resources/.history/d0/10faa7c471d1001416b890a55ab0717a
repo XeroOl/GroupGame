@@ -2,8 +2,8 @@ package com.lasacsgames.game.level;
 
 public abstract class Level {
 
-	protected int width, height;
-	protected int[] tiles;
+	private int width, height;
+	private int[] tiles;
 
 	public Level(String path) {
 		load(path);

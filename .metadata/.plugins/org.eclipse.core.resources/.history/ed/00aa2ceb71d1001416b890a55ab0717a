@@ -7,7 +7,7 @@ public class RandomizedLevel extends Level{
 	}
 	
 	protected void generateLevel() {
-
+		
 	}
 
 }
