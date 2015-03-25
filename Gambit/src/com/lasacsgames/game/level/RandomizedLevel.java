@@ -23,6 +23,7 @@ public class RandomizedLevel extends Level {
 				tiles[x][y]=0x00000000;
 			}
 		}
+		
 		// PLACEHOLDER GENERATOR, DO NOT ATTEMPT TO UNDERSTAND
 		int tilesleft = width * height / 2;
 		int x = r.nextInt(width);
