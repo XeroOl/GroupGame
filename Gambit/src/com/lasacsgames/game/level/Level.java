@@ -6,7 +6,6 @@ public abstract class Level {
 	protected int[][] tiles;
 
 	public Level() {
-
 	}
 
 	public void setWidth(int width) {
