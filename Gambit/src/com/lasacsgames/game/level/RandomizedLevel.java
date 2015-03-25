@@ -7,8 +7,9 @@ public class RandomizedLevel extends Level {
 
 	public RandomizedLevel(int width, int height) {
 		setDimension(width, height);
-		generateLevel();
 		r = new Random();
+		generateLevel();
+		
 	}
 
 	public RandomizedLevel(int width, int height, int seed) {

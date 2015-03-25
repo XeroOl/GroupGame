@@ -9,8 +9,11 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.lasacsgames.game.entity.mob.Player;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
+import com.lasacsgames.game.level.Level;
+import com.lasacsgames.game.level.RandomizedLevel;
 import com.lasacsgames.game.state.GameState;
 import com.lasacsgames.game.state.MenuState;
 
@@ -23,6 +26,9 @@ public class Game extends Canvas implements Runnable {
 	private static String title = "Lol what are we doin'?";
 	private static boolean running = false;
 
+	private Player player;
+	private Level level;
+	
 	private Keyboard key;
 	private Screen screen;
 
@@ -39,11 +45,16 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
+		
+		level = new RandomizedLevel(16,16);
 
 		screen = new Screen(width, height);
 		state = new MenuState();
 
 		key = new Keyboard();
+		
+		player = new Player(0, 0, key, level);
+		
 
 		addKeyListener(key);
 	}
@@ -106,22 +117,27 @@ public class Game extends Canvas implements Runnable {
 
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
-		if (bs == null) {
+		if (bs == null)
+		{
 			createBufferStrategy(3);
 			return;
 		}
 
 		screen.clear();
-		screen.render();
-		for (int i = 0; i < pixels.length; i++) {
+		int xScroll = (int) player.location.x - screen.width / 2;
+		int yScroll = (int) player.location.y - screen.height / 2;
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
+
+		for (int i = 0; i < pixels.length; i++)
+		{
 			pixels[i] = screen.pixels[i];
 		}
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		
-		bs.show();
 		g.dispose();
+		bs.show();
 	}
 
 	public static void main(String[] args) {
