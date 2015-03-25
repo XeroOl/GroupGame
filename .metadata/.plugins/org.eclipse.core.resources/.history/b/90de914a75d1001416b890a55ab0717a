@@ -1,6 +1,0 @@
-package com.lasacsgames.game.input.keys;
-
-public abstract class Key {
-
-	public int keyCode;
-}

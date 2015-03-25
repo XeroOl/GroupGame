@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.lasacsgames.game.entity.Entity"/>
-<fullyQualifiedTypeName name="com.lasacsgames.game.physics.Point"/>
-<fullyQualifiedTypeName name="com.lasacsgames.game.level.Level"/>
-<fullyQualifiedTypeName name="com.lasacsgames.game.graphics.Sprite"/>
-<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-</qualifiedTypeNameHistroy>
