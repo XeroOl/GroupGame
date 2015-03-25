@@ -41,5 +41,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-.metadata*
+.metadata/*
+RemoteSystemsTempFiles/*
 Gambit/.classpath
