@@ -1,5 +1,7 @@
 package com.lasacsgames.game.entity.projectile;
 
-public abstract class Projectile {
+import com.lasacsgames.game.entity.Entity;
+
+public abstract class Projectile extends Entity{
 
 }
