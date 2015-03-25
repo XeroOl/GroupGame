@@ -1,5 +1,15 @@
 package com.lasacsgames.game.level.tile;
 
-public class VoidTile extends Tile{
+import com.lasacsgames.game.graphics.Sprite;
+
+public class VoidTile extends Tile {
+
+	public VoidTile(Sprite sprite) {
+		super(sprite);
+	}
+
+	public boolean solid() {
+		return true;
+	}
 
 }
