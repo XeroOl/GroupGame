@@ -6,36 +6,50 @@ import com.lasacsgames.game.level.Level;
 import com.lasacsgames.game.physics.Point;
 import com.lasacsgames.game.physics.Vector;
 
-public abstract class Entity {
+public abstract class Entity
+{
 
 	public Point location;
 	public Vector vector;
-	private boolean removed = false;
-	protected Level level;
+	public Level level;
 	protected final Random random = new Random();
 
-	public void update() {
+	// Entity properties
+	private boolean removed = false;
+	public boolean drawable = true;
+	protected boolean moveable = true;
+	protected boolean moving = false;
+	protected boolean collidable = true;
+	public int dir = 0;
+
+	public void update()
+	{
 
 	}
 
-	public void render() {
+	public void render()
+	{
 
 	}
 
-	public void remove() {
+	public void remove()
+	{
 		// Remove from level
 		removed = true;
 	}
 
-	public boolean isRemoved() {
+	public boolean isRemoved()
+	{
 		return removed;
 	}
 
-	public void setLevel(Level level) {
+	public void setLevel(Level level)
+	{
 		this.level = level;
 	}
 
-	public Level getLevel() {
+	public Level getLevel()
+	{
 		return level;
 	}
 }

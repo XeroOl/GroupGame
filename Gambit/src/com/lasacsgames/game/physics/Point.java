@@ -38,4 +38,9 @@ public class Point
 		x -= p.x;
 		y -= p.y;
 	}
+
+	public Point clone()
+	{
+		return new Point(x, y);
+	}
 }

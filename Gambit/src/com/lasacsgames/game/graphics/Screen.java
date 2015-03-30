@@ -2,6 +2,7 @@ package com.lasacsgames.game.graphics;
 
 import java.util.Random;
 
+import com.lasacsgames.game.entity.mob.Player;
 import com.lasacsgames.game.level.tile.Tile;
 
 public class Screen {
@@ -46,7 +47,8 @@ public class Screen {
 		}
 	}
 
-	public void renderPlayer(int xp, int yp, Sprite sprite, int flip) {
+	public void renderPlayer(int xp, int yp, Sprite sprite, int flip, Player player) {
+		if(!player.drawable) return;
 		xp -= xOffSet;
 		yp -= yOffSet;
 		for (int y = 0; y < sprite.SIZE; y++) {

@@ -11,6 +11,12 @@ public class Vector
 		this.y = y;
 	}
 
+	public Vector()
+	{
+		x = 0;
+		y = 0;
+	}
+
 	public void add(Vector v)
 	{
 		this.x += v.x;

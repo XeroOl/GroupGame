@@ -7,8 +7,6 @@ public abstract class Mob extends Entity
 {
 
 	public Sprite sprite;
-	protected int dir = 0;
-	protected boolean moving = false;
 
 	public void move()
 	{
@@ -38,6 +36,7 @@ public abstract class Mob extends Entity
 
 	public boolean collision(double xa, double ya)
 	{
+		if(!collidable) return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{

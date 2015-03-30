@@ -1,5 +1,6 @@
 package com.lasacsgames.game.entity.mob;
 
+import com.lasacsgames.game.entity.projectile.Projectile;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.input.Keyboard;
@@ -14,6 +15,7 @@ public class Player extends Mob
 	private Sprite sprite;
 	private boolean walking = false;
 	private int anim = 0;
+	Projectile[] bullets;
 
 	public Player(Keyboard input, Level level)
 	{
@@ -50,7 +52,7 @@ public class Player extends Mob
 		if (input.RIGHT)
 			vector.x++;
 
-		if (vector.x != 0 || vector.y != 0)
+		if (moveable && vector.x != 0 || vector.y != 0)
 		{
 			move();
 			walking = true;
@@ -99,7 +101,7 @@ public class Player extends Mob
 		}
 		if (dir == 3)
 			flip = 1;
-		screen.renderPlayer((int) location.x - 16, (int) location.y - 16, sprite, flip);
+		screen.renderPlayer(location.x - 16, location.y - 16, sprite, flip, this);
 	}
 
 	public void spawnRandomly()
@@ -113,6 +115,7 @@ public class Player extends Mob
 
 	public boolean collision(double xa, double ya)
 	{
+		if(!collidable) return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
