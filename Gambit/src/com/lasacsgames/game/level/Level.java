@@ -5,7 +5,8 @@ import com.lasacsgames.game.level.tile.Tile;
 
 public abstract class Level {
 
-	protected int width, height;
+	public int width;
+	public int height;
 	protected int[][] tiles;
 
 	public Level() {

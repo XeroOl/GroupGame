@@ -54,6 +54,7 @@ public class Game extends Canvas implements Runnable {
 		key = new Keyboard();
 		
 		player = new Player(0, 0, key, level);
+		player.spawnRandomly();
 		
 
 		addKeyListener(key);
@@ -89,7 +90,7 @@ public class Game extends Canvas implements Runnable {
 			previous = current;
 			lag += elapsed;
 
-			key.update();
+			
 
 			while (lag >= MS_PER_UPDATE) {
 				update();
@@ -112,7 +113,9 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
+		key.update();
 		state.update(this);
+		player.update();
 	}
 
 	public void render() {
