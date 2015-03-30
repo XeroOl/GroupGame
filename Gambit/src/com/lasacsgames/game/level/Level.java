@@ -52,9 +52,7 @@ public abstract class Level {
 	public Tile getTile(int x, int y)
 	{
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-		//if (tiles[x][y] == 0xFF00FF00) return Tile.grass;
-		//if (tiles[x][y] == 0xFFFFFF00) return Tile.flower;
-		//if (tiles[x][y] == 0xFF7F7F00) return Tile.rock;
+		if (tiles[x][y] == 0xffffffff) return Tile.grass;
 		return Tile.voidTile;
 	}
 
