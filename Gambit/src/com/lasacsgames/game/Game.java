@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		
-		level = new RandomizedLevel(16,16);
+		level = new RandomizedLevel(64,64);
 
 		screen = new Screen(width, height);
 		state = new MenuState();

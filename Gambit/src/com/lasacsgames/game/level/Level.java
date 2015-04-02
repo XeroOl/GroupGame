@@ -8,7 +8,9 @@ public abstract class Level {
 	public int width;
 	public int height;
 	protected int[][] tiles;
-
+	public static final int VOID_ID = 0;
+	public static final int GRASS_ID = 0xffffffff;
+	public static final int FLOWER_ID = 0xff000000;
 	public Level() {
 	}
 
@@ -46,17 +48,32 @@ public abstract class Level {
 		}
 
 	}
-	public int getTileId(int x, int y){
-		if (x < 0 || y < 0 || x >= width || y >= height)return 0x00000000;
-		else return tiles[x][y];
-		
+
+	public int getTileId(int x, int y) {
+		if (x < 0 || y < 0 || x >= width || y >= height)
+			return VOID_ID;
+		return tiles[x][y];
 	}
+
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
-			return Tile.voidTile;
-		if (tiles[x][y] == 0xffffffff)
-			return Tile.grass;
-		return Tile.voidTile;
+			return Tile.VOID_TILE;
+		switch(tiles[x][y]){
+		case VOID_ID:
+			return Tile.VOID_TILE;
+		case GRASS_ID:
+			return Tile.GRASS_TILE;
+		case FLOWER_ID:
+			return Tile.FLOWER_TILE;
+		default:
+			return Tile.VOID_TILE;
+		}
+	}
+
+	public void setTile(int x, int y, int id) {
+		if (x < 0 || y < 0 || x >= width || y >= height)
+			return;
+		tiles[x][y]=id;
 	}
 
 }

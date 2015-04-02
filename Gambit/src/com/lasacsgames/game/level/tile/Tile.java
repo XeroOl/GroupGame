@@ -6,12 +6,12 @@ import com.lasacsgames.game.graphics.Sprite;
 public abstract class Tile
 {
 
-	public int x, y;
+	public int x, y; //X and Y are unused;
 	public Sprite sprite;
 
-	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
-	public static Tile grass = new GrassTile(Sprite.grass);
-
+	public static Tile VOID_TILE = new VoidTile(Sprite.VOID_SPRITE);
+	public static Tile GRASS_TILE = new GrassTile(Sprite.GRASS_SPRITE);
+	public static Tile FLOWER_TILE = new VoidTile(Sprite.FLOWER_SPRITE);
 	public Tile(Sprite sprite)
 	{
 		this.sprite = sprite;

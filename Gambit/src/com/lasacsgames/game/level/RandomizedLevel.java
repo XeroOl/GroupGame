@@ -2,6 +2,8 @@ package com.lasacsgames.game.level;
 
 import java.util.Random;
 
+import com.lasacsgames.game.level.tile.Tile;
+
 public class RandomizedLevel extends Level {
 	Random r;
 
@@ -14,98 +16,120 @@ public class RandomizedLevel extends Level {
 
 	public RandomizedLevel(int width, int height, int seed) {
 		setDimension(width, height);
-		generateLevel();
 		r = new Random(seed);
+		generateLevel();
+
 	}
 
 	protected void generateLevel() {
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < width; y++) {
-				tiles[x][y] = r.nextBoolean() ? 0x00000000 : 0xffffffff;
-			}
-		}
-
-		tiles = gol(9, 7);
-		tiles = gol(7, 5);
-		tiles = gol(9, 5);
-	}
-
-	protected int[][] gol(int numtosolid, int numtoair) {
-		int[][] newTiles = new int[width][height];
 		for (int x = 0; x < width; x++)
 			for (int y = 0; y < height; y++) {
-				newTiles[x][y] = tiles[x][y];
-				if (getTile(x, y).solid()) {
-					if (getNeighbors(x, y, 1, 0xffffffff) >= numtoair)
-						newTiles[x][y] = 0xffffffff;
-				} else {
-					if (getNeighbors(x, y, 1, 0x00000000) >= numtosolid)
-						newTiles[x][y] = 0x00000000;
-				}
+				setTile(x, y, r.nextBoolean() ? FLOWER_ID : VOID_ID);
 			}
-		return newTiles;
+
+		int x = width / 2;
+		int y = height / 2;
+		branch(x, y, width * height / 4);
+		branch(x, y, width * height / 4);
+		branch(x, y, width * height / 4);
+		branch(x, y, width * height / 4);
+		removeWalls(FLOWER_ID, GRASS_ID, 3.5, 0);
+		removeWalls(VOID_ID, GRASS_ID, 3.5, 0);
+		removeWalls(VOID_ID, FLOWER_ID, 1.3, 1);
+		removeWalls(VOID_ID, FLOWER_ID, 1.3, 1);
 	}
 
-	protected int getNeighbors(int x, int y, int dist, int countme) {
-		int count = 0;
-		for (int x1 = x - dist; x1 <= x + dist; x1++) {
-			for (int y1 = y - dist; y1 <= y + dist; y1++) {
-				if (x1 != x || y1 != y) {
-					if (getTileId(x1, y1) == countme) {
-						count++;
+	public void removeWalls(int wallId, int notwallId, double ratiotochange,
+			int dist) {
+		if (dist == 0)
+			for (int x = 1; x < width - 1; x++)
+				for (int y = 1; y < height - 1; y++) {
+					if (tiles[x][y] == wallId) {
+						int notcount = 0;
+						int count = 0;
+						if (tiles[x - 1][y] == wallId)
+							count++;
+						if (tiles[x + 1][y] == wallId)
+							count++;
+						if (tiles[x][y - 1] == wallId)
+							count++;
+						if (tiles[x][y + 1] == wallId)
+							count++;
+						if (tiles[x - 1][y] == notwallId)
+							notcount++;
+						if (tiles[x + 1][y] == notwallId)
+							notcount++;
+						if (tiles[x][y - 1] == notwallId)
+							notcount++;
+						if (tiles[x][y + 1] == notwallId)
+							notcount++;
+						if (count != 0
+								&& notcount / (double) count > ratiotochange) {
+							tiles[x][y] = notwallId;
+						}
+					}
+				}
+		else {
+			int[][] newtiles = new int[width][height];
+			for (int x = dist; x < width - dist; x++) {
+				for (int y = dist; y < height - dist; y++) {
+					newtiles[x][y] = tiles[x][y];
+					if (tiles[x][y] == wallId) {
+						int count = 0;
+						int notcount = 0;
+						for (int x2 = x - dist; x2 < x + dist + 1; x2++) {
+							for (int y2 = y - dist; y2 < y + dist + 1; y2++) {
+								if (tiles[x2][y2] == notwallId) {
+									notcount++;
+								}
+								if (tiles[x2][y2] == wallId) {
+									count++;
+								}
+							}
+						}
+						if (count != 0
+								&& notcount / (double) count > ratiotochange) {
+							tiles[x][y] = notwallId;
+						}
 					}
 				}
 			}
+			tiles = newtiles;
 		}
-		return count;
 	}
 
-	public void connect(int x1, int y1, int x2, int y2) {
-		int[][] weight = new int[width][height];
-		for(int x=0;x<width;x++){
-			for(int y=0;y<height;y++){
-				weight[x][y]=100000;
-			}
-		}
-		weight[x1][y1]=0;
-		process(x1, y1, weight);
-		followWeight(x2,y2);
+	int total = 0;
 
-	}
-	protected void followWeight(int x, int y){
-		
-	}
-	protected void process(int x, int y, int[][] weight) {
-		if (x > 0) {
-			if (weight[x - 1][y] > weight[x][y]
-					+ (getTileId(x, y) == 0 ? 4 : 1)) {
-				weight[x - 1][y] = weight[x][y]
-						+ (getTileId(x, y) == 0 ? 4 : 1);
-				process(x - 1, y, weight);
+	protected void branch(int x, int y, int dist) {
+		int dir = r.nextInt(4);
+		while (total < width * height / 2 && dist > 0) {
+			dist--;
+			total++;
+			setTile(x, y, GRASS_ID);
+			int dirtemp = (r.nextInt(3) + dir + 3) % 4;
+			switch (dirtemp) {
+			case 0:
+				if (x > 0) {
+					x--;
+				}
+				break;
+			case 1:
+				if (x < width - 1) {
+					x++;
+				}
+				break;
+			case 2:
+				if (y > 0) {
+					y--;
+				}
+				break;
+			case 3:
+				if (y < height - 1) {
+					y++;
+				}
 			}
-		}
-		if (y > 0) {
-			if (weight[x][y - 1] > weight[x][y]
-					+ (getTileId(x, y) == 0 ? 4 : 1)) {
-				weight[x][y - 1] = weight[x][y]
-						+ (getTileId(x, y) == 0 ? 4 : 1);
-				process(x, y - 1, weight);
-			}
-		}
-		if (x <width-1) {
-			if (weight[x +1][y] > weight[x][y]
-					+ (getTileId(x, y) == 0 ? 4 : 1)) {
-				weight[x + 1][y] = weight[x][y]
-						+ (getTileId(x, y) == 0 ? 4 : 1);
-				process(x + 1, y, weight);
-			}
-		}
-		if (y <height-1) {
-			if (weight[x ][y+1] > weight[x][y]
-					+ (getTileId(x, y) == 0 ? 4 : 1)) {
-				weight[x ][y+1] = weight[x][y]
-						+ (getTileId(x, y) == 0 ? 4 : 1);
-				process(x , y+1, weight);
+			if (r.nextInt(8) == 0) {
+				branch(x, y, r.nextInt(width * height / 20));
 			}
 		}
 	}
