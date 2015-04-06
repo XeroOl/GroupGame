@@ -11,7 +11,7 @@ public class Sprite
 	public static Sprite GRASS_SPRITE = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite VOID_SPRITE = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite ROCK_SPRITE = new Sprite(16, 1, 0, SpriteSheet.tiles);
-	public static Sprite BRICK_TILE = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
 
 	public static Sprite player_forward = new Sprite(32, 0, 5, SpriteSheet.tiles);
 	public static Sprite player_side = new Sprite(32, 1, 5, SpriteSheet.tiles);
