@@ -10,7 +10,7 @@ public abstract class Level {
 	protected int[][] tiles;
 	public static final int VOID_ID = 0;
 	public static final int GRASS_ID = 0xffffffff;
-	public static final int FLOWER_ID = 0xff000000;
+	public static final int ROCK_ID = 0xff000000;
 	public Level() {
 	}
 
@@ -63,8 +63,8 @@ public abstract class Level {
 			return Tile.VOID_TILE;
 		case GRASS_ID:
 			return Tile.GRASS_TILE;
-		case FLOWER_ID:
-			return Tile.FLOWER_TILE;
+		case ROCK_ID:
+			return Tile.ROCK_TILE;
 		default:
 			return Tile.VOID_TILE;
 		}

@@ -24,7 +24,7 @@ public class RandomizedLevel extends Level {
 	protected void generateLevel() {
 		for (int x = 0; x < width; x++)
 			for (int y = 0; y < height; y++) {
-				setTile(x, y, FLOWER_ID);
+				setTile(x, y, ROCK_ID);
 			}
 
 		int x = width / 2;
@@ -33,8 +33,8 @@ public class RandomizedLevel extends Level {
 		branch(x, y, width * height / 4);
 		branch(x, y, width * height / 4);
 		branch(x, y, width * height / 4);
-		removeWalls(FLOWER_ID, GRASS_ID, 3.0, 2);
-		removeWalls(FLOWER_ID, GRASS_ID, 1.0, 1);
+		removeWalls(ROCK_ID, GRASS_ID, 3.0, 2);
+		removeWalls(ROCK_ID, GRASS_ID, 1.0, 1);
 	}
 
 	public void removeWalls(int wallId, int notwallId, double ratiotochange,
