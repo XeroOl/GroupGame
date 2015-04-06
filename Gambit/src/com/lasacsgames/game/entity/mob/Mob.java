@@ -1,6 +1,7 @@
 package com.lasacsgames.game.entity.mob;
 
 import com.lasacsgames.game.entity.Entity;
+import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 
 public abstract class Mob extends Entity
@@ -36,7 +37,8 @@ public abstract class Mob extends Entity
 
 	public boolean collision(double xa, double ya)
 	{
-		if(!collidable) return false;
+		if (!collidable)
+			return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
@@ -48,13 +50,13 @@ public abstract class Mob extends Entity
 		return b;
 	}
 
-	public void render()
+	public void render(Screen screen)
 	{
 	}
 
 	public boolean aabbCollision(Mob obj)
 	{
-		return false;
+		return (this.location.x - 8 <= obj.location.x + 8 && obj.location.x - 8 <= this.location.x + 8 && this.location.y - 8 <= obj.location.y + 8 && obj.location.y - 8 <= this.location.y + 8);
 
 	}
 }
