@@ -5,7 +5,8 @@ import java.util.Random;
 import com.lasacsgames.game.entity.mob.Player;
 import com.lasacsgames.game.level.tile.Tile;
 
-public class Screen {
+public class Screen
+{
 
 	public int[] pixels;
 	public int width, height;
@@ -13,30 +14,38 @@ public class Screen {
 
 	private static Random random = new Random();
 
-	public Screen(int width, int height) {
+	public Screen(int width, int height)
+	{
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
 	}
 
-	public void clear() {
-		for (int i = 0; i < pixels.length; i++) {
+	public void clear()
+	{
+		for (int i = 0; i < pixels.length; i++)
+		{
 			pixels[i] = 0;
 		}
 	}
 
-	public void render() {
-		for (int i = 0; i < pixels.length; i++) {
+	public void render()
+	{
+		for (int i = 0; i < pixels.length; i++)
+		{
 			pixels[i] = random.nextBoolean() ? 0 : 0xffffff;
 		}
 	}
 
-	public void renderTile(int xp, int yp, Tile tile) {
+	public void renderTile(int xp, int yp, Tile tile)
+	{
 		xp -= xOffSet;
 		yp -= yOffSet;
-		for (int y = 0; y < tile.sprite.SIZE; y++) {
+		for (int y = 0; y < tile.sprite.SIZE; y++)
+		{
 			int ya = y + yp;
-			for (int x = 0; x < tile.sprite.SIZE; x++) {
+			for (int x = 0; x < tile.sprite.SIZE; x++)
+			{
 				int xa = x + xp;
 				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height)
 					break;
@@ -47,16 +56,45 @@ public class Screen {
 		}
 	}
 
-	public void renderPlayer(int xp, int yp, Sprite sprite, int flip, Player player) {
-		if(!player.drawable) return;
+	public void renderMob(int xp, int yp, Sprite sprite, boolean drawable)
+	{
+		if (!drawable)
+			return;
 		xp -= xOffSet;
 		yp -= yOffSet;
-		for (int y = 0; y < sprite.SIZE; y++) {
+		for (int y = 0; y < sprite.SIZE; y++)
+		{
+			int ya = y + yp;
+			int ys = y;
+			for (int x = 0; x < sprite.SIZE; x++)
+			{
+				int xa = x + xp;
+				int xs = x;
+				if (xa < -16 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
+				int col = sprite.pixels[xs + ys * sprite.SIZE];
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
+			}
+		}
+	}
+
+	public void renderPlayer(int xp, int yp, Sprite sprite, int flip, Player player)
+	{
+		if (!player.drawable)
+			return;
+		xp -= xOffSet;
+		yp -= yOffSet;
+		for (int y = 0; y < sprite.SIZE; y++)
+		{
 			int ya = y + yp;
 			int ys = y;
 			if (flip == 2 || flip == 3)
 				ys = sprite.SIZE - 1 - y;
-			for (int x = 0; x < sprite.SIZE; x++) {
+			for (int x = 0; x < sprite.SIZE; x++)
+			{
 				int xa = x + xp;
 				int xs = x;
 				if (flip == 1 || flip == 3)
@@ -72,7 +110,8 @@ public class Screen {
 		}
 	}
 
-	public void setOffSet(int xOffSet, int yOffSet) {
+	public void setOffSet(int xOffSet, int yOffSet)
+	{
 		this.xOffSet = xOffSet;
 		this.yOffSet = yOffSet;
 	}
