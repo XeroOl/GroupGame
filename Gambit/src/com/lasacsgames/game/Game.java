@@ -13,7 +13,7 @@ import com.lasacsgames.game.entity.mob.Player;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.level.Level;
-import com.lasacsgames.game.level.RandomizedLevel;
+import com.lasacsgames.game.level.OrganicRandomizedLevel;
 import com.lasacsgames.game.state.GameState;
 import com.lasacsgames.game.state.MenuState;
 
@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		
-		level = new RandomizedLevel(64,64);
+		level = new OrganicRandomizedLevel(64,64);
 
 		screen = new Screen(width, height);
 		state = new MenuState();

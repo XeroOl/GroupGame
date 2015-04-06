@@ -11,6 +11,7 @@ public abstract class Level {
 	public static final int VOID_ID = 0;
 	public static final int GRASS_ID = 0xffffffff;
 	public static final int ROCK_ID = 0xff000000;
+	public static final int BRICK_ID = 0xffff0000;
 	public Level() {
 	}
 
@@ -65,6 +66,8 @@ public abstract class Level {
 			return Tile.GRASS_TILE;
 		case ROCK_ID:
 			return Tile.ROCK_TILE;
+		case BRICK_ID:
+			return Tile.BRICK_TILE;
 		default:
 			return Tile.VOID_TILE;
 		}
