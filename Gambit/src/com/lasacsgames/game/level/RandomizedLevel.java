@@ -24,7 +24,7 @@ public class RandomizedLevel extends Level {
 	protected void generateLevel() {
 		for (int x = 0; x < width; x++)
 			for (int y = 0; y < height; y++) {
-				setTile(x, y, r.nextBoolean() ? FLOWER_ID : VOID_ID);
+				setTile(x, y, FLOWER_ID);
 			}
 
 		int x = width / 2;
@@ -33,14 +33,13 @@ public class RandomizedLevel extends Level {
 		branch(x, y, width * height / 4);
 		branch(x, y, width * height / 4);
 		branch(x, y, width * height / 4);
-		removeWalls(FLOWER_ID, GRASS_ID, 3.5, 0);
-		removeWalls(VOID_ID, GRASS_ID, 3.5, 0);
-		removeWalls(VOID_ID, FLOWER_ID, 1.3, 1);
-		removeWalls(VOID_ID, FLOWER_ID, 1.3, 1);
+		removeWalls(FLOWER_ID, GRASS_ID, 3.0, 2);
+		removeWalls(FLOWER_ID, GRASS_ID, 1.0, 1);
 	}
 
 	public void removeWalls(int wallId, int notwallId, double ratiotochange,
 			int dist) {
+		int[][] newtiles = new int[width][height];
 		if (dist == 0)
 			for (int x = 1; x < width - 1; x++)
 				for (int y = 1; y < height - 1; y++) {
@@ -65,12 +64,12 @@ public class RandomizedLevel extends Level {
 							notcount++;
 						if (count != 0
 								&& notcount / (double) count > ratiotochange) {
-							tiles[x][y] = notwallId;
+							newtiles[x][y] = notwallId;
 						}
 					}
 				}
 		else {
-			int[][] newtiles = new int[width][height];
+
 			for (int x = dist; x < width - dist; x++) {
 				for (int y = dist; y < height - dist; y++) {
 					newtiles[x][y] = tiles[x][y];
@@ -87,15 +86,16 @@ public class RandomizedLevel extends Level {
 								}
 							}
 						}
-						if (count != 0
-								&& notcount / (double) count > ratiotochange) {
-							tiles[x][y] = notwallId;
+						if (count == 0
+								|| notcount / (double) count > ratiotochange) {
+							newtiles[x][y] = notwallId;
 						}
 					}
 				}
 			}
-			tiles = newtiles;
+
 		}
+		tiles = newtiles;
 	}
 
 	int total = 0;
