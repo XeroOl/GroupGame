@@ -2,14 +2,13 @@ package com.lasacsgames.game.level;
 
 public class OrganicRandomizedLevel extends RandomizedLevel {
 
-
 	public OrganicRandomizedLevel(int width, int height) {
-		super(width,height);
+		super(width, height);
 
 	}
 
 	public OrganicRandomizedLevel(int width, int height, int seed) {
-		super(width,height,seed);
+		super(width, height, seed);
 
 	}
 
@@ -27,6 +26,7 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 		branch(x, y, width * height / 4);
 		removeWalls(ROCK_ID, GRASS_ID, 3.0, 2);
 		removeWalls(ROCK_ID, GRASS_ID, 1.0, 1);
+		fixTextures();
 	}
 
 	public void removeWalls(int wallId, int notwallId, double ratiotochange,
@@ -124,5 +124,20 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 				branch(x, y, r.nextInt(width * height / 20));
 			}
 		}
+	}
+
+	public void fixTextures() {
+		for (int x = 0; x < width ; x++)
+			for (int y = 1; y < height - 1; y++) {
+				if(tiles[x][y]==ROCK_ID){
+					if(tiles[x][y+1]==GRASS_ID){
+						if(tiles[x][y-1]==GRASS_ID){
+							tiles[x][y]=ROCK_SHARD_ID;
+						}else{
+							tiles[x][y]=ROCK_DOWN_ID;
+						}
+					}
+				}
+			}
 	}
 }

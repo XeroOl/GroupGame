@@ -11,7 +11,10 @@ public abstract class Level {
 	public static final int VOID_ID = 0;
 	public static final int GRASS_ID = 0xffffffff;
 	public static final int ROCK_ID = 0xff000000;
+	public static final int ROCK_DOWN_ID = 0xff000001;
+	public static final int ROCK_SHARD_ID = 0xff000002;
 	public static final int BRICK_ID = 0xffff0000;
+
 	public Level() {
 	}
 
@@ -59,13 +62,17 @@ public abstract class Level {
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.VOID_TILE;
-		switch(tiles[x][y]){
+		switch (tiles[x][y]) {
 		case VOID_ID:
 			return Tile.VOID_TILE;
 		case GRASS_ID:
 			return Tile.GRASS_TILE;
 		case ROCK_ID:
 			return Tile.ROCK_TILE;
+		case ROCK_DOWN_ID:
+			return Tile.ROCK_DOWN_TILE;
+		case ROCK_SHARD_ID:
+			return Tile.ROCK_SHARD_TILE;
 		case BRICK_ID:
 			return Tile.BRICK_TILE;
 		default:
@@ -76,7 +83,7 @@ public abstract class Level {
 	public void setTile(int x, int y, int id) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return;
-		tiles[x][y]=id;
+		tiles[x][y] = id;
 	}
 
 }

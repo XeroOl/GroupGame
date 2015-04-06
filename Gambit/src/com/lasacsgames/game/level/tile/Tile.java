@@ -12,6 +12,8 @@ public abstract class Tile
 	public static Tile VOID_TILE = new VoidTile(Sprite.VOID_SPRITE);
 	public static Tile GRASS_TILE = new GrassTile(Sprite.GRASS_SPRITE);
 	public static Tile ROCK_TILE = new RockTile(Sprite.ROCK_SPRITE);
+	public static Tile ROCK_DOWN_TILE = new RockTile(Sprite.ROCK_DOWN_SPRITE);
+	public static Tile ROCK_SHARD_TILE = new RockTile(Sprite.ROCK_SHARD_SPRITE);
 	public static Tile BRICK_TILE = new BrickTile(Sprite.BRICK_SPRITE);
 
 	public Tile(Sprite sprite)
