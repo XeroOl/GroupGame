@@ -1,7 +1,5 @@
 package com.lasacsgames.game.graphics;
 
-import com.lasacsgames.game.level.tile.RockTile;
-import com.lasacsgames.game.level.tile.Tile;
 
 public class Sprite {
 
@@ -18,7 +16,7 @@ public class Sprite {
 	public static Sprite ROCK_SHARD_SPRITE = new Sprite(16, 6, 0,
 			SpriteSheet.tiles);
 	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
-
+	
 	public static Sprite player_forward = new Sprite(32, 0, 5,
 			SpriteSheet.tiles);
 	public static Sprite player_side = new Sprite(32, 1, 5, SpriteSheet.tiles);

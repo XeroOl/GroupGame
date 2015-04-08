@@ -8,6 +8,7 @@ public abstract class Level {
 	public int width;
 	public int height;
 	protected int[][] tiles;
+	protected short[][] variation;
 	public static final int VOID_ID = 0;
 	public static final int GRASS_ID = 0xffffffff;
 	public static final int ROCK_ID = 0xff000000;
@@ -21,17 +22,20 @@ public abstract class Level {
 	public void setWidth(int width) {
 		this.width = width;
 		tiles = new int[width][height];
+		variation = new short[width][height];
 	}
 
 	public void setHeight(int height) {
 		this.height = height;
 		tiles = new int[width][height];
+		variation = new short[width][height];
 	}
 
 	public void setDimension(int width, int height) {
 		this.width = width;
 		this.height = height;
 		tiles = new int[width][height];
+		variation = new short[width][height];
 	}
 
 	public void update() {
@@ -57,6 +61,18 @@ public abstract class Level {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return VOID_ID;
 		return tiles[x][y];
+	}
+
+	public short getTileVar(int x, int y) {
+		if (x < 0 || y < 0 || x >= width || y >= height)
+			return 0;
+		return variation[x][y];
+	}
+
+	public void setTileVar(int x, int y, short id) {
+		if (x < 0 || y < 0 || x >= width || y >= height)
+			return;
+		variation[x][y] = id;
 	}
 
 	public Tile getTile(int x, int y) {
