@@ -20,10 +20,11 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 
 		int x = width / 2;
 		int y = height / 2;
-		branch(x, y, width * height / 4);
-		branch(x, y, width * height / 4);
-		branch(x, y, width * height / 4);
-		branch(x, y, width * height / 4);
+
+		branch(x, y, width * height / 4,0);
+		branch(x, y, width * height / 4,1);
+		branch(x, y, width * height / 4,2);
+		branch(x, y, width * height / 4,3);
 		removeWalls(ROCK_ID, GRASS_ID, 3.0, 2);
 		removeWalls(ROCK_ID, GRASS_ID, 1.0, 1);
 		fixTextures();
@@ -93,7 +94,11 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 	int total = 0;
 
 	protected void branch(int x, int y, int dist) {
-		int dir = r.nextInt(4);
+		branch(x, y, dist, r.nextInt(4));
+	}
+
+	protected void branch(int x, int y, int dist, int dir) {
+
 		while (total < width * height / 2 && dist > 0) {
 			dist--;
 			total++;
@@ -120,21 +125,21 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 					y++;
 				}
 			}
-			if (r.nextInt(8) == 0) {
-				branch(x, y, r.nextInt(width * height / 20));
+			if (r.nextInt(40) == 0) {
+				branch(x, y, r.nextInt(width * height / 20),r.nextBoolean()?dir+1:dir-1);
 			}
 		}
 	}
 
 	public void fixTextures() {
-		for (int x = 0; x < width ; x++)
+		for (int x = 0; x < width; x++)
 			for (int y = 1; y < height - 1; y++) {
-				if(tiles[x][y]==ROCK_ID){
-					if(tiles[x][y+1]==GRASS_ID){
-						if(tiles[x][y-1]==GRASS_ID){
-							tiles[x][y]=ROCK_SHARD_ID;
-						}else{
-							tiles[x][y]=ROCK_DOWN_ID;
+				if (tiles[x][y] == ROCK_ID) {
+					if (tiles[x][y + 1] == GRASS_ID) {
+						if (tiles[x][y - 1] == GRASS_ID) {
+							tiles[x][y] = ROCK_SHARD_ID;
+						} else {
+							tiles[x][y] = ROCK_DOWN_ID;
 						}
 					}
 				}
