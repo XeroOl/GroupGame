@@ -1,18 +1,12 @@
 package com.lasacsgames.game.graphics;
 
-import java.util.Random;
-
-import com.lasacsgames.game.entity.mob.Player;
 import com.lasacsgames.game.level.tile.Tile;
 
 public class Screen
 {
-
 	public int[] pixels;
 	public int width, height;
 	public int xOffSet, yOffSet;
-
-	private static Random random = new Random();
 
 	public Screen(int width, int height)
 	{
@@ -29,14 +23,6 @@ public class Screen
 		}
 	}
 
-	public void render()
-	{
-		for (int i = 0; i < pixels.length; i++)
-		{
-			pixels[i] = random.nextBoolean() ? 0 : 0xffffff;
-		}
-	}
-
 	public void renderTile(int xp, int yp, Tile tile)
 	{
 		xp -= xOffSet;
@@ -47,44 +33,33 @@ public class Screen
 			for (int x = 0; x < tile.sprite.SIZE; x++)
 			{
 				int xa = x + xp;
-				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height)
-					break;
-				if (xa < 0)
-					xa = 0;
+				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
 				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 			}
 		}
 	}
-	
-	public void renderPellet(int xp, int yp, Sprite sprite, boolean drawable)
+
+	public void renderPellet(int xp, int yp, Sprite sprite)
 	{
-		if (!drawable)
-			return;
 		xp -= xOffSet;
 		yp -= yOffSet;
 		for (int y = 0; y < sprite.SIZE; y++)
 		{
 			int ya = y + yp;
-			int ys = y;
 			for (int x = 0; x < sprite.SIZE; x++)
 			{
 				int xa = x + xp;
-				int xs = x;
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height)
-					break;
-				if (xa < 0)
-					xa = 0;
-				int col = sprite.pixels[xs + ys * sprite.SIZE];
-				if (col != 0xffff00ff)
-					pixels[xa + ya * width] = col;
+				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
+				int col = sprite.pixels[x + y * sprite.SIZE];
+				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
 			}
 		}
 	}
 
-	public void renderMob(int xp, int yp, Sprite sprite, boolean drawable)
+	public void renderMob(int xp, int yp, Sprite sprite)
 	{
-		if (!drawable)
-			return;
 		xp -= xOffSet;
 		yp -= yOffSet;
 		for (int y = 0; y < sprite.SIZE; y++)
@@ -95,42 +70,32 @@ public class Screen
 			{
 				int xa = x + xp;
 				int xs = x;
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height)
-					break;
-				if (xa < 0)
-					xa = 0;
+				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
 				int col = sprite.pixels[xs + ys * sprite.SIZE];
-				if (col != 0xffff00ff)
-					pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
 			}
 		}
 	}
 
-	public void renderPlayer(int xp, int yp, Sprite sprite, int flip, Player player)
+	public void renderPlayer(int xp, int yp, Sprite sprite, int flip)
 	{
-		if (!player.drawable)
-			return;
 		xp -= xOffSet;
 		yp -= yOffSet;
 		for (int y = 0; y < sprite.SIZE; y++)
 		{
 			int ya = y + yp;
 			int ys = y;
-			if (flip == 2 || flip == 3)
-				ys = sprite.SIZE - 1 - y;
+			if (flip == 2 || flip == 3) ys = sprite.SIZE - 1 - y;
 			for (int x = 0; x < sprite.SIZE; x++)
 			{
 				int xa = x + xp;
 				int xs = x;
-				if (flip == 1 || flip == 3)
-					xs = sprite.SIZE - 1 - x;
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height)
-					break;
-				if (xa < 0)
-					xa = 0;
+				if (flip == 1 || flip == 3) xs = sprite.SIZE - 1 - x;
+				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
 				int col = sprite.pixels[xs + ys * sprite.SIZE];
-				if (col != 0xffff00ff)
-					pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
 			}
 		}
 	}

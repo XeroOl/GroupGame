@@ -16,6 +16,6 @@ public class GhostEnemy extends Mob
 
 	public void render(Screen screen)
 	{
-		screen.renderMob(location.x - 8, location.y - 8, Sprite.ghost, drawable);
+		if(drawable) screen.renderMob(location.x - 8, location.y - 8, Sprite.ghost);
 	}
 }

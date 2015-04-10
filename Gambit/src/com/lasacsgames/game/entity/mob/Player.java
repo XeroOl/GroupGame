@@ -54,18 +54,13 @@ public class Player extends Mob
 	{
 		vector.x = 0;
 		vector.y = 0;
-		if (anim < 7500)
-			anim++;
+		if (anim < 7500) anim++;
 		else
 			anim = 0;
-		if (input.UP)
-			vector.y--;
-		if (input.DOWN)
-			vector.y++;
-		if (input.LEFT)
-			vector.x--;
-		if (input.RIGHT)
-			vector.x++;
+		if (input.UP) vector.y--;
+		if (input.DOWN) vector.y++;
+		if (input.LEFT) vector.x--;
+		if (input.RIGHT) vector.x++;
 
 		if (moveable && vector.x != 0 || vector.y != 0)
 		{
@@ -73,10 +68,8 @@ public class Player extends Mob
 			walking = true;
 		} else
 			walking = false;
-		if (recoil > 0)
-			recoil--;
-		if (input.SPACE && recoil == 0)
-			shoot();
+		if (recoil > 0) recoil--;
+		if (input.SPACE && recoil == 0) shoot();
 		updateBullets();
 	}
 
@@ -119,13 +112,11 @@ public class Player extends Mob
 					sprite = Sprite.player_backward_2;
 			}
 		}
-		if (dir == 3)
-			flip = 1;
-		screen.renderPlayer(location.x - 16, location.y - 16, sprite, flip, this);
+		if (dir == 3) flip = 1;
+		if (drawable) screen.renderPlayer(location.x - 16, location.y - 16, sprite, flip);
 		for (int i = 0; i < bullets.length; i++)
 		{
-			if (!bullets[i].isRemoved())
-				bullets[i].render(screen);
+			if (!bullets[i].isRemoved()) bullets[i].render(screen);
 		}
 	}
 
@@ -146,8 +137,7 @@ public class Player extends Mob
 	{
 		for (int i = 0; i < bullets.length; i++)
 		{
-			if (!bullets[i].isRemoved())
-				bullets[i].update();
+			if (!bullets[i].isRemoved()) bullets[i].update();
 		}
 	}
 
@@ -162,15 +152,13 @@ public class Player extends Mob
 
 	public boolean collision(double xa, double ya)
 	{
-		if (!collidable)
-			return false;
+		if (!collidable) return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
 			int x = (i / 2) * 3;
 			int y = (i % 2) * 3;
-			if (getLevel().getTile((((int) (location.x + xa - 2 + x)) >> 4), (((int) (location.y + ya - 2 + y) >> 4))).solid())
-				b = true;
+			if (getLevel().getTile((((int) (location.x + xa - 2 + x)) >> 4), (((int) (location.y + ya - 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
 	}

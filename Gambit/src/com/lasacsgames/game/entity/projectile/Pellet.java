@@ -15,6 +15,6 @@ public class Pellet extends Projectile
 
 	public void render(Screen screen)
 	{
-		screen.renderPellet(location.x - 8, location.y - 8, sprite, drawable);
+		if(drawable) screen.renderPellet(location.x - 8, location.y - 8, sprite);
 	}
 }
