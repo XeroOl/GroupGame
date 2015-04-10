@@ -1,5 +1,6 @@
 package com.lasacsgames.game.entity.mob;
 
+import com.lasacsgames.game.entity.projectile.Pellet;
 import com.lasacsgames.game.entity.projectile.Projectile;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
@@ -15,7 +16,7 @@ public class Player extends Mob
 	private Sprite sprite;
 	private boolean walking = false;
 	private int anim = 0;
-	Projectile[] bullets;
+	private Projectile[] bullets;
 
 	public Player(Keyboard input, Level level)
 	{
@@ -24,6 +25,13 @@ public class Player extends Mob
 		this.setLevel(level);
 		sprite = Sprite.player_forward;
 		vector = new Vector(0, 0);
+		bullets = new Projectile[10];
+		for (int i = 0; i < bullets.length; i++)
+		{
+			bullets[i] = new Pellet(this, 2);
+			bullets[i].remove();
+		}
+
 	}
 
 	public Player(int x, int y, Keyboard input, Level level)
@@ -33,6 +41,12 @@ public class Player extends Mob
 		this.input = input;
 		this.setLevel(level);
 		sprite = Sprite.player_forward;
+		bullets = new Projectile[10];
+		for (int i = 0; i < bullets.length; i++)
+		{
+			bullets[i] = new Pellet(this, 2);
+			bullets[i].remove();
+		}
 	}
 
 	public void update()
@@ -58,6 +72,8 @@ public class Player extends Mob
 			walking = true;
 		} else
 			walking = false;
+		
+		if(input.SPACE) shoot();
 	}
 
 	public void render(Screen screen)
@@ -104,6 +120,28 @@ public class Player extends Mob
 		screen.renderPlayer(location.x - 16, location.y - 16, sprite, flip, this);
 	}
 
+	public void shoot()
+	{
+		for (int i = 0; i < bullets.length; i++)
+		{
+			if (bullets[i].isRemoved())
+			{
+				bullets[i].respawn();
+				System.out.println("SHOOTING!!!");
+				return;
+			}
+		}
+	}
+
+	public void updateBullets()
+	{
+		for (int i = 0; i < bullets.length; i++)
+		{
+			if (!bullets[i].isRemoved())
+				bullets[i].update();
+		}
+	}
+
 	public void spawnRandomly()
 	{
 		while (collision(0, 0))
@@ -115,7 +153,8 @@ public class Player extends Mob
 
 	public boolean collision(double xa, double ya)
 	{
-		if(!collidable) return false;
+		if (!collidable)
+			return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
