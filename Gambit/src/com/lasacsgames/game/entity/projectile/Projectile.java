@@ -23,19 +23,19 @@ public abstract class Projectile extends Entity
 
 		if (owner.dir == 0)
 		{
-			vector.x = speed;
+			vector.y = -speed;
 		}
 		if (owner.dir == 1)
 		{
-			vector.y = -speed;
+			vector.x = speed;
 		}
 		if (owner.dir == 2)
 		{
-			vector.x = -speed;
+			vector.y = speed;
 		}
 		if (owner.dir == 3)
 		{
-			vector.y = speed;
+			vector.x = -speed;
 		}
 		vector.add(owner.vector);
 
@@ -58,15 +58,10 @@ public abstract class Projectile extends Entity
 
 	public void move()
 	{
-		if (vector.y > 0)
-			dir = 2;
-		if (vector.y < 0)
-			dir = 0;
-		if (vector.x > 0)
-			dir = 1;
-		if (vector.x < 0)
-			dir = 3;
-
+		/*
+		 * if (vector.y > 0) dir = 2; if (vector.y < 0) dir = 0; if (vector.x >
+		 * 0) dir = 1; if (vector.x < 0) dir = 3;
+		 */
 		location.x += vector.x;
 		location.y += vector.y;
 
@@ -78,20 +73,21 @@ public abstract class Projectile extends Entity
 		vector = new Vector();
 		if (owner.dir == 0)
 		{
-			vector.x = speed;
+			vector.y = -speed;
 		}
 		if (owner.dir == 1)
 		{
-			vector.y = -speed;
+			vector.x = speed;
 		}
 		if (owner.dir == 2)
 		{
-			vector.x = -speed;
+			vector.y = speed;
 		}
 		if (owner.dir == 3)
 		{
-			vector.y = speed;
+			vector.x = -speed;
 		}
+		recreate();
 	}
 
 	public boolean collision()

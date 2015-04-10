@@ -77,10 +77,7 @@ public class Player extends Mob
 			recoil--;
 		if (input.SPACE && recoil == 0)
 			shoot();
-		for (Projectile b : bullets)
-		{
-			b.update();
-		}
+		updateBullets();
 	}
 
 	public void render(Screen screen)
@@ -127,7 +124,8 @@ public class Player extends Mob
 		screen.renderPlayer(location.x - 16, location.y - 16, sprite, flip, this);
 		for (int i = 0; i < bullets.length; i++)
 		{
-			bullets[i].render(screen);
+			if (!bullets[i].isRemoved())
+				bullets[i].render(screen);
 		}
 	}
 
