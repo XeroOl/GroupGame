@@ -16,6 +16,7 @@ public class Player extends Mob
 	private Sprite sprite;
 	private boolean walking = false;
 	private int anim = 0;
+	private int recoil = 0;
 	private Projectile[] bullets;
 
 	public Player(Keyboard input, Level level)
@@ -72,8 +73,11 @@ public class Player extends Mob
 			walking = true;
 		} else
 			walking = false;
-		
-		if(input.SPACE) shoot();
+		if (recoil > 0)
+			recoil--;
+		if (input.SPACE && recoil == 0)
+			shoot();
+		updateBullets();
 	}
 
 	public void render(Screen screen)
@@ -118,6 +122,11 @@ public class Player extends Mob
 		if (dir == 3)
 			flip = 1;
 		screen.renderPlayer(location.x - 16, location.y - 16, sprite, flip, this);
+		for (int i = 0; i < bullets.length; i++)
+		{
+			if (!bullets[i].isRemoved())
+				bullets[i].render(screen);
+		}
 	}
 
 	public void shoot()
@@ -127,7 +136,7 @@ public class Player extends Mob
 			if (bullets[i].isRemoved())
 			{
 				bullets[i].respawn();
-				System.out.println("SHOOTING!!!");
+				recoil = 10;
 				return;
 			}
 		}

@@ -17,7 +17,8 @@ import com.lasacsgames.game.level.OrganicRandomizedLevel;
 import com.lasacsgames.game.state.GameState;
 import com.lasacsgames.game.state.MenuState;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable
+{
 	private static final long serialVersionUID = 1L;
 
 	private static int width = 320;
@@ -28,7 +29,7 @@ public class Game extends Canvas implements Runnable {
 
 	private Player player;
 	private Level level;
-	
+
 	private Keyboard key;
 	private Screen screen;
 
@@ -36,47 +37,49 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private Thread thread;
 
-	private BufferedImage image = new BufferedImage(width, height,
-			BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
-			.getData();
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	public Game() {
+	public Game()
+	{
 		frame = new JFrame();
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
-		
-		level = new OrganicRandomizedLevel(64,64);
+
+		level = new OrganicRandomizedLevel(64, 64);
 
 		screen = new Screen(width, height);
 		state = new MenuState();
 
 		key = new Keyboard();
-		
+
 		player = new Player(0, 0, key, level);
 		player.spawnRandomly();
-		
 
 		addKeyListener(key);
 	}
 
-	public void start() {
+	public void start()
+	{
 		running = true;
 		thread = new Thread(this, "Display");
 		thread.start();
 	}
 
-	public void stop() {
+	public void stop()
+	{
 		running = false;
-		try {
+		try
+		{
 			thread.join();
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	//@Override
-	public void run() {
+	public void run()
+	{
 		final double ns = 1000000000.0;
 		final double MS_PER_UPDATE = 1.0 / 60.0;
 		double previous = System.nanoTime() / ns;
@@ -84,15 +87,15 @@ public class Game extends Canvas implements Runnable {
 		int updates = 0;
 		int frames = 0;
 		long timer = System.currentTimeMillis();
-		while (running) {
+		while (running)
+		{
 			double current = System.nanoTime() / ns;
 			double elapsed = current - previous;
 			previous = current;
 			lag += elapsed;
 
-			
-
-			while (lag >= MS_PER_UPDATE) {
+			while (lag >= MS_PER_UPDATE)
+			{
 				update();
 				updates++;
 				lag -= MS_PER_UPDATE;
@@ -101,10 +104,10 @@ public class Game extends Canvas implements Runnable {
 			render();
 			frames++;
 
-			if (System.currentTimeMillis() - timer > 1000) {
+			if (System.currentTimeMillis() - timer > 1000)
+			{
 				timer += 1000;
-				frame.setTitle(title + "  |  " + updates + " ups, " + frames
-						+ " fps");
+				frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
 				updates = 0;
 				frames = 0;
 			}
@@ -112,13 +115,15 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	public void update() {
+	public void update()
+	{
 		key.update();
 		state.update(this);
 		player.update();
 	}
 
-	public void render() {
+	public void render()
+	{
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null)
 		{
@@ -143,7 +148,8 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 
 		Game game = new Game();
 
