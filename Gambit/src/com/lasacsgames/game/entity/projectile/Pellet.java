@@ -12,9 +12,9 @@ public class Pellet extends Projectile
 		super(owner, speed);
 		sprite = Sprite.bullet;
 	}
-	
-	public void render(Screen screen) {
-		screen.renderPellet(location.x, location.y, sprite, drawable);
-	}
 
+	public void render(Screen screen)
+	{
+		screen.renderPellet(location.x - 8, location.y - 8, sprite, drawable);
+	}
 }

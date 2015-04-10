@@ -5,8 +5,6 @@ import com.lasacsgames.game.graphics.Sprite;
 
 public abstract class Tile
 {
-
-	public int x, y; // X and Y are unused;
 	public Sprite sprite;
 
 	public static Tile VOID_TILE = new VoidTile(Sprite.VOID_SPRITE);
