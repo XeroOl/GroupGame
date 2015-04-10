@@ -125,6 +125,7 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 					y++;
 				}
 			}
+			setTile(x, y, GRASS_ID);
 			if (r.nextInt(40) == 0) {
 				branch(x, y, r.nextInt(width * height / 20),
 						r.nextBoolean() ? dir + 1 : dir - 1);
@@ -138,13 +139,13 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 				if (tiles[x][y] == ROCK_ID) {
 					int surround = 0;
 					if (tiles[x][y - 1] == GRASS_ID)
-						surround += 1;
+						surround += 1;//up
 					if (tiles[x][y + 1] == GRASS_ID)
-						surround += 2;
+						surround += 2;//down
 					if (tiles[x - 1][y] == GRASS_ID)
-						surround += 4;
+						surround += 4;//left
 					if (tiles[x + 1][y] == GRASS_ID)
-						surround += 8;
+						surround += 8;//right
 					switch (surround) {
 					case 0:
 						variation[x][y] = 0;
@@ -162,7 +163,22 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 					case 2:
 						variation[x][y] = 5;break;
 					case 3:
+					case 7:
+					case 11:
+					case 12:
+					case 13:
+					case 14:
+					case 15:
 						variation[x][y] = 13;break;
+					case 4:
+						variation[x][y] = 7;break;
+					case 5:
+						variation[x][y]=8;break;
+					case 6:variation[x][y]=6;break;
+					case 8:variation[x][y]=3;break;
+					case 9:variation[x][y]=2;break;
+					case 10:variation[x][y]=4;break;
+					
 					}
 				}
 			}
