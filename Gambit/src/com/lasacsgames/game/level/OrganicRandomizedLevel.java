@@ -137,49 +137,24 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 		for (int x = 1; x < width - 1; x++)
 			for (int y = 1; y < height - 1; y++) {
 				if (tiles[x][y] == ROCK_ID) {
-					int surround = 0;
-					if (tiles[x][y - 1] == GRASS_ID)
-						surround += 1;//up
-					if (tiles[x][y + 1] == GRASS_ID)
-						surround += 2;//down
-					if (tiles[x - 1][y] == GRASS_ID)
-						surround += 4;//left
-					if (tiles[x + 1][y] == GRASS_ID)
-						surround += 8;//right
-					switch (surround) {
-					case 0:
-						variation[x][y] = 0;
-						if (tiles[x + 1][y - 1] == GRASS_ID)
-							variation[x][y] = 9;
-						if (tiles[x - 1][y - 1] == GRASS_ID)
-							variation[x][y] = 10;
-						if (tiles[x + 1][y + 1] == GRASS_ID)
-							variation[x][y] = 11;
-						if (tiles[x - 1][y + 1] == GRASS_ID)
-							variation[x][y] = 12;
-						break;
-					case 1:
-						variation[x][y] = 1;break;
-					case 2:
-						variation[x][y] = 5;break;
-					case 3:
-					case 7:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-						variation[x][y] = 13;break;
-					case 4:
-						variation[x][y] = 7;break;
-					case 5:
-						variation[x][y]=8;break;
-					case 6:variation[x][y]=6;break;
-					case 8:variation[x][y]=3;break;
-					case 9:variation[x][y]=2;break;
-					case 10:variation[x][y]=4;break;
-					
-					}
+					short surround = 0;
+					if (tiles[x-1][y - 1] == GRASS_ID)
+						surround += 1;
+					if (tiles[x-1][y] == GRASS_ID)
+						surround += 2;
+					if (tiles[x - 1][y+1] == GRASS_ID)
+						surround += 4;
+					if (tiles[x ][y-1] == GRASS_ID)
+						surround += 8;
+					if (tiles[x ][y+1] == GRASS_ID)
+						surround += 16;
+					if (tiles[x+1 ][y-1] == GRASS_ID)
+						surround += 32;
+					if (tiles[x+1 ][y] == GRASS_ID)
+						surround += 64;
+					if (tiles[x+1 ][y+1] == GRASS_ID)
+						surround += 128;
+					variation[x][y]=surround;
 				}
 			}
 	}

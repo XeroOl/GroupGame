@@ -6,24 +6,24 @@ public class Sprite {
 	private int x, y;
 	public int[] pixels;
 	private SpriteSheet sheet;
-/* 0 - center 1 - 8 edges, starting with up 9 - 12 inner corner, bottom left, bottom right, top left, top right, 13- lone rock*/
+	/*
+	 * 0 - center 1 - 8 edges, starting with up 9 - 12 inner corner, bottom
+	 * left, bottom right, top left, top right, 13- lone rock
+	 */
 	public static Sprite GRASS_SPRITE = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite VOID_SPRITE = new Sprite(16, 3, 0, SpriteSheet.tiles);
-	public static Sprite[] ROCK_SPRITE = {
-			new Sprite(16, 10, 1, SpriteSheet.tiles),
-			new Sprite(16, 10, 0, SpriteSheet.tiles),
-			new Sprite(16, 11, 0, SpriteSheet.tiles),
-			new Sprite(16, 11, 1, SpriteSheet.tiles),
-			new Sprite(16, 11, 2, SpriteSheet.tiles),
-			new Sprite(16, 10, 2, SpriteSheet.tiles),
-			new Sprite(16, 9, 2, SpriteSheet.tiles),
-			new Sprite(16, 9, 1, SpriteSheet.tiles),
-			new Sprite(16, 9, 0, SpriteSheet.tiles),
-			new Sprite(16, 12, 1, SpriteSheet.tiles),
-			new Sprite(16, 13, 1, SpriteSheet.tiles),
-			new Sprite(16, 12, 0, SpriteSheet.tiles),
-			new Sprite(16, 13, 0, SpriteSheet.tiles),
-			new Sprite(16, 6, 0, SpriteSheet.tiles) };
+	public static Sprite[] ROCK_SPRITE = rockSprites();
+
+	protected static Sprite[] rockSprites() {
+		Sprite[] m = new Sprite[256];
+		for (int i = 0; i < 16; i++) {
+			for (int h = 0; h < 16; h++) {
+				m[i + 16 * h] = new Sprite(16, i, h, SpriteSheet.rocks);
+			}
+		}
+		return m;
+	}
+
 	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
 
 	public static Sprite player_forward = new Sprite(32, 0, 5,

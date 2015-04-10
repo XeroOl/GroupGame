@@ -10,20 +10,16 @@ public abstract class Tile {
 
 	public static Tile VOID_TILE = new VoidTile(Sprite.VOID_SPRITE);
 	public static Tile GRASS_TILE = new GrassTile(Sprite.GRASS_SPRITE);
-	public static Tile[] ROCK_TILE = { new RockTile(Sprite.ROCK_SPRITE[0]),
-			new RockTile(Sprite.ROCK_SPRITE[1]),
-			new RockTile(Sprite.ROCK_SPRITE[2]),
-			new RockTile(Sprite.ROCK_SPRITE[3]),
-			new RockTile(Sprite.ROCK_SPRITE[4]),
-			new RockTile(Sprite.ROCK_SPRITE[5]),
-			new RockTile(Sprite.ROCK_SPRITE[6]),
-			new RockTile(Sprite.ROCK_SPRITE[7]),
-			new RockTile(Sprite.ROCK_SPRITE[8]),
-			new RockTile(Sprite.ROCK_SPRITE[9]),
-			new RockTile(Sprite.ROCK_SPRITE[10]),
-			new RockTile(Sprite.ROCK_SPRITE[11]),
-			new RockTile(Sprite.ROCK_SPRITE[12]),
-			new RockTile(Sprite.ROCK_SPRITE[13])};
+	public static Tile[] ROCK_TILE = rockTiles();
+
+	protected static Tile[] rockTiles() {
+		Tile[] t = new Tile[256];
+		for (int i = 0; i < 256; i++) {
+			t[i] = new RockTile(Sprite.ROCK_SPRITE[i]);
+		}
+		return t;
+	}
+
 	public static Tile BRICK_TILE = new BrickTile(Sprite.BRICK_SPRITE);
 
 	public Tile(Sprite sprite) {
