@@ -79,16 +79,14 @@ public abstract class Level {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.VOID_TILE;
 		switch (tiles[x][y]) {
+		
+		
 		case VOID_ID:
 			return Tile.VOID_TILE;
 		case GRASS_ID:
 			return Tile.GRASS_TILE;
 		case ROCK_ID:
-			return Tile.ROCK_TILE;
-		case ROCK_DOWN_ID:
-			return Tile.ROCK_DOWN_TILE;
-		case ROCK_SHARD_ID:
-			return Tile.ROCK_SHARD_TILE;
+			return Tile.ROCK_TILE[variation[x][y]];
 		case BRICK_ID:
 			return Tile.BRICK_TILE;
 		default:

@@ -21,10 +21,10 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 		int x = width / 2;
 		int y = height / 2;
 
-		branch(x, y, width * height / 4,0);
-		branch(x, y, width * height / 4,1);
-		branch(x, y, width * height / 4,2);
-		branch(x, y, width * height / 4,3);
+		branch(x, y, width * height / 4, 0);
+		branch(x, y, width * height / 4, 1);
+		branch(x, y, width * height / 4, 2);
+		branch(x, y, width * height / 4, 3);
 		removeWalls(ROCK_ID, GRASS_ID, 3.0, 2);
 		removeWalls(ROCK_ID, GRASS_ID, 1.0, 1);
 		fixTextures();
@@ -126,21 +126,43 @@ public class OrganicRandomizedLevel extends RandomizedLevel {
 				}
 			}
 			if (r.nextInt(40) == 0) {
-				branch(x, y, r.nextInt(width * height / 20),r.nextBoolean()?dir+1:dir-1);
+				branch(x, y, r.nextInt(width * height / 20),
+						r.nextBoolean() ? dir + 1 : dir - 1);
 			}
 		}
 	}
 
 	public void fixTextures() {
-		for (int x = 0; x < width; x++)
+		for (int x = 1; x < width - 1; x++)
 			for (int y = 1; y < height - 1; y++) {
 				if (tiles[x][y] == ROCK_ID) {
-					if (tiles[x][y + 1] == GRASS_ID) {
-						if (tiles[x][y - 1] == GRASS_ID) {
-							tiles[x][y] = ROCK_SHARD_ID;
-						} else {
-							tiles[x][y] = ROCK_DOWN_ID;
-						}
+					int surround = 0;
+					if (tiles[x][y - 1] == GRASS_ID)
+						surround += 1;
+					if (tiles[x][y + 1] == GRASS_ID)
+						surround += 2;
+					if (tiles[x - 1][y] == GRASS_ID)
+						surround += 4;
+					if (tiles[x + 1][y] == GRASS_ID)
+						surround += 8;
+					switch (surround) {
+					case 0:
+						variation[x][y] = 0;
+						if (tiles[x + 1][y - 1] == GRASS_ID)
+							variation[x][y] = 9;
+						if (tiles[x - 1][y - 1] == GRASS_ID)
+							variation[x][y] = 10;
+						if (tiles[x + 1][y + 1] == GRASS_ID)
+							variation[x][y] = 11;
+						if (tiles[x - 1][y + 1] == GRASS_ID)
+							variation[x][y] = 12;
+						break;
+					case 1:
+						variation[x][y] = 1;break;
+					case 2:
+						variation[x][y] = 5;break;
+					case 3:
+						variation[x][y] = 13;break;
 					}
 				}
 			}

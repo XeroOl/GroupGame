@@ -1,22 +1,31 @@
 package com.lasacsgames.game.graphics;
 
-
 public class Sprite {
 
 	public final int SIZE;
 	private int x, y;
 	public int[] pixels;
 	private SpriteSheet sheet;
-
+/* 0 - center 1 - 8 edges, starting with up 9 - 12 inner corner, bottom left, bottom right, top left, top right, 13- lone rock*/
 	public static Sprite GRASS_SPRITE = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite VOID_SPRITE = new Sprite(16, 3, 0, SpriteSheet.tiles);
-	public static Sprite ROCK_SPRITE = new Sprite(16, 1, 0, SpriteSheet.tiles);
-	public static Sprite ROCK_DOWN_SPRITE = new Sprite(16, 5, 0,
-			SpriteSheet.tiles);
-	public static Sprite ROCK_SHARD_SPRITE = new Sprite(16, 6, 0,
-			SpriteSheet.tiles);
+	public static Sprite[] ROCK_SPRITE = {
+			new Sprite(16, 10, 1, SpriteSheet.tiles),
+			new Sprite(16, 10, 0, SpriteSheet.tiles),
+			new Sprite(16, 11, 0, SpriteSheet.tiles),
+			new Sprite(16, 11, 1, SpriteSheet.tiles),
+			new Sprite(16, 11, 2, SpriteSheet.tiles),
+			new Sprite(16, 10, 2, SpriteSheet.tiles),
+			new Sprite(16, 9, 2, SpriteSheet.tiles),
+			new Sprite(16, 9, 1, SpriteSheet.tiles),
+			new Sprite(16, 9, 0, SpriteSheet.tiles),
+			new Sprite(16, 12, 1, SpriteSheet.tiles),
+			new Sprite(16, 13, 1, SpriteSheet.tiles),
+			new Sprite(16, 12, 0, SpriteSheet.tiles),
+			new Sprite(16, 13, 0, SpriteSheet.tiles),
+			new Sprite(16, 6, 0, SpriteSheet.tiles) };
 	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
-	
+
 	public static Sprite player_forward = new Sprite(32, 0, 5,
 			SpriteSheet.tiles);
 	public static Sprite player_side = new Sprite(32, 1, 5, SpriteSheet.tiles);
