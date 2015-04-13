@@ -40,7 +40,7 @@ public class Screen
 		}
 	}
 
-	public void renderPellet(int xp, int yp, Sprite sprite)
+	public void renderEntity(int xp, int yp, Sprite sprite)
 	{
 		xp -= xOffSet;
 		yp -= yOffSet;
@@ -50,29 +50,10 @@ public class Screen
 			for (int x = 0; x < sprite.SIZE; x++)
 			{
 				int xa = x + xp;
+
 				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
 				if (xa < 0) xa = 0;
 				int col = sprite.pixels[x + y * sprite.SIZE];
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
-			}
-		}
-	}
-
-	public void renderMob(int xp, int yp, Sprite sprite)
-	{
-		xp -= xOffSet;
-		yp -= yOffSet;
-		for (int y = 0; y < sprite.SIZE; y++)
-		{
-			int ya = y + yp;
-			int ys = y;
-			for (int x = 0; x < sprite.SIZE; x++)
-			{
-				int xa = x + xp;
-				int xs = x;
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = sprite.pixels[xs + ys * sprite.SIZE];
 				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
 			}
 		}

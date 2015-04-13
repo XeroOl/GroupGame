@@ -1,5 +1,6 @@
 package com.lasacsgames.game.entity;
 
+import java.awt.Dimension;
 import java.util.Random;
 
 import com.lasacsgames.game.level.Level;
@@ -13,6 +14,7 @@ public abstract class Entity
 	public Vector vector;
 	public Level level;
 	protected final Random random = new Random();
+	public Dimension size;
 
 	// Entity properties
 	private boolean removed = false;
@@ -24,12 +26,10 @@ public abstract class Entity
 
 	public void update()
 	{
-
 	}
 
 	public void render()
 	{
-
 	}
 
 	public void remove()
@@ -37,23 +37,14 @@ public abstract class Entity
 		// Remove from level
 		removed = true;
 	}
-	
-	public void recreate() {
+
+	public void recreate()
+	{
 		removed = false;
 	}
 
 	public boolean isRemoved()
 	{
 		return removed;
-	}
-
-	public void setLevel(Level level)
-	{
-		this.level = level;
-	}
-
-	public Level getLevel()
-	{
-		return level;
 	}
 }
