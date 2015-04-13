@@ -1,5 +1,7 @@
 package com.lasacsgames.game.entity.mob;
 
+import java.awt.Dimension;
+
 import com.lasacsgames.game.entity.projectile.Pellet;
 import com.lasacsgames.game.entity.projectile.Projectile;
 import com.lasacsgames.game.graphics.Screen;
@@ -11,7 +13,6 @@ import com.lasacsgames.game.physics.Vector;
 
 public class Player extends Mob
 {
-
 	public Keyboard input;
 	private Sprite sprite;
 	private boolean walking = false;
@@ -23,8 +24,9 @@ public class Player extends Mob
 	{
 		location = new Point(0, 0);
 		this.input = input;
-		this.setLevel(level);
+		this.level = level;
 		sprite = Sprite.player_forward;
+		size = new Dimension(2, 2);
 		vector = new Vector(0, 0);
 		bullets = new Projectile[10];
 		for (int i = 0; i < bullets.length; i++)
@@ -40,7 +42,7 @@ public class Player extends Mob
 		this.location = new Point(x, y);
 		vector = new Vector(0, 0);
 		this.input = input;
-		this.setLevel(level);
+		this.level = level;
 		sprite = Sprite.player_forward;
 		bullets = new Projectile[10];
 		for (int i = 0; i < bullets.length; i++)
@@ -127,7 +129,7 @@ public class Player extends Mob
 			if (bullets[i].isRemoved())
 			{
 				bullets[i].respawn();
-				recoil = 10;
+				recoil = 15;
 				return;
 			}
 		}
@@ -158,7 +160,7 @@ public class Player extends Mob
 		{
 			int x = (i / 2) * 3;
 			int y = (i % 2) * 3;
-			if (getLevel().getTile((((int) (location.x + xa - 2 + x)) >> 4), (((int) (location.y + ya - 2 + y) >> 4))).solid()) b = true;
+			if (level.getTile((((int) (location.x + xa - 2 + x)) >> 4), (((int) (location.y + ya - 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
 	}

@@ -11,14 +11,11 @@ public abstract class Mob extends Entity
 
 	public void move()
 	{
-		if (vector.y > 0)
-			dir = 2;
-		if (vector.y < 0)
-			dir = 0;
-		if (vector.x > 0)
-			dir = 1;
-		if (vector.x < 0)
-			dir = 3;
+
+		if (vector.y > 0) dir = 2;
+		if (vector.y < 0) dir = 0;
+		if (vector.x > 0) dir = 1;
+		if (vector.x < 0) dir = 3;
 
 		if (!collision(vector.x, 0))
 		{
@@ -37,15 +34,13 @@ public abstract class Mob extends Entity
 
 	public boolean collision(double xa, double ya)
 	{
-		if (!collidable)
-			return false;
+		if (!collidable) return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
 			int x = (i / 2) * 7;
 			int y = (i % 2) * 7;
-			if (getLevel().getTile((((int) (location.x + xa - 4 + x)) >> 4), (((int) (location.y + ya - 4 + y) >> 4))).solid())
-				b = true;
+			if (level.getTile((((int) (location.x + xa - 4 + x)) >> 4), (((int) (location.y + ya - 4 + y) >> 4))).solid()) b = true;
 		}
 		return b;
 	}
@@ -57,6 +52,5 @@ public abstract class Mob extends Entity
 	public boolean aabbCollision(Mob obj)
 	{
 		return (this.location.x - 8 <= obj.location.x + 8 && obj.location.x - 8 <= this.location.x + 8 && this.location.y - 8 <= obj.location.y + 8 && obj.location.y - 8 <= this.location.y + 8);
-
 	}
 }

@@ -43,11 +43,9 @@ public abstract class Projectile extends Entity
 
 	public void update()
 	{
-		if (isRemoved())
-			return;
+		if (isRemoved()) return;
 		move();
-		if (collision())
-			remove();
+		if (collision()) remove();
 
 	}
 
@@ -58,10 +56,6 @@ public abstract class Projectile extends Entity
 
 	public void move()
 	{
-		/*
-		 * if (vector.y > 0) dir = 2; if (vector.y < 0) dir = 0; if (vector.x >
-		 * 0) dir = 1; if (vector.x < 0) dir = 3;
-		 */
 		location.x += vector.x;
 		location.y += vector.y;
 
@@ -92,15 +86,13 @@ public abstract class Projectile extends Entity
 
 	public boolean collision()
 	{
-		if (!collidable)
-			return false;
+		if (!collidable) return false;
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
 			int x = (i / 2) * 7;
 			int y = (i % 2) * 7;
-			if (getLevel().getTile((((int) (location.x - 4 + x)) >> 4), (((int) (location.y - 4 + y) >> 4))).solid())
-				b = true;
+			if (level.getTile((((int) (location.x - 4 + x)) >> 4), (((int) (location.y - 4 + y) >> 4))).solid()) b = true;
 		}
 		return b;
 
