@@ -3,7 +3,8 @@ package com.lasacsgames.game.level.tile;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 
-public abstract class Tile {
+public abstract class Tile
+{
 
 	public int x, y; // X and Y are unused;
 	public Sprite sprite;
@@ -12,9 +13,11 @@ public abstract class Tile {
 	public static Tile GRASS_TILE = new GrassTile(Sprite.GRASS_SPRITE);
 	public static Tile[] ROCK_TILE = rockTiles();
 
-	protected static Tile[] rockTiles() {
+	protected static Tile[] rockTiles()
+	{
 		Tile[] t = new Tile[256];
-		for (int i = 0; i < 256; i++) {
+		for (int i = 0; i < 256; i++)
+		{
 			t[i] = new RockTile(Sprite.ROCK_SPRITE[i]);
 		}
 		return t;
@@ -22,15 +25,18 @@ public abstract class Tile {
 
 	public static Tile BRICK_TILE = new BrickTile(Sprite.BRICK_SPRITE);
 
-	public Tile(Sprite sprite) {
+	public Tile(Sprite sprite)
+	{
 		this.sprite = sprite;
 	}
 
-	public void render(int x, int y, Screen screen) {
+	public void render(int x, int y, Screen screen)
+	{
 		screen.renderTile(x << 4, y << 4, this);
 	}
 
-	public boolean solid() {
+	public boolean solid()
+	{
 		return false;
 	}
 

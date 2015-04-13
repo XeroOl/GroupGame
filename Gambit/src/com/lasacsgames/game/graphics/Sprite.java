@@ -14,10 +14,13 @@ public class Sprite
 	public static Sprite VOID_SPRITE = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite[] ROCK_SPRITE = rockSprites();
 
-	protected static Sprite[] rockSprites() {
+	protected static Sprite[] rockSprites()
+	{
 		Sprite[] m = new Sprite[256];
-		for (int i = 0; i < 16; i++) {
-			for (int h = 0; h < 16; h++) {
+		for (int i = 0; i < 16; i++)
+		{
+			for (int h = 0; h < 16; h++)
+			{
 				m[i + 16 * h] = new Sprite(16, i, h, SpriteSheet.rocks);
 			}
 		}
