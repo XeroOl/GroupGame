@@ -63,6 +63,7 @@ public class Player extends Mob
 		if (input.DOWN) vector.y++;
 		if (input.LEFT) vector.x--;
 		if (input.RIGHT) vector.x++;
+		if(input.BACKSLASH && !input.tempCodeFix) collidable = !collidable;
 
 		if (moveable && vector.x != 0 || vector.y != 0)
 		{
