@@ -67,6 +67,7 @@ public class Player extends Mob
 
 		if (moveable && vector.x != 0 || vector.y != 0)
 		{
+			if(!collidable) vector.multiply(3.0);
 			move();
 			walking = true;
 		} else
