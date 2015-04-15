@@ -22,4 +22,10 @@ public class Vector
 		this.x += v.x;
 		this.y += v.y;
 	}
+
+	public void multiply(double factor)
+	{
+		this.x *= factor;
+		this.y *= factor;
+	}
 }

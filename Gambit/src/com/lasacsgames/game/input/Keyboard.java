@@ -3,31 +3,38 @@ package com.lasacsgames.game.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Keyboard implements KeyListener {
+public class Keyboard implements KeyListener
+{
 
 	private boolean[] keys = new boolean[200];
-	public boolean UP, LEFT, DOWN, RIGHT, ENTER, SPACE;
+	public boolean UP, LEFT, DOWN, RIGHT, ENTER, SPACE, BACKSLASH, tempCodeFix;
 
-	public void update() {
+	public void update()
+	{
 		UP = keys[KeyEvent.VK_UP];
 		LEFT = keys[KeyEvent.VK_LEFT];
 		RIGHT = keys[KeyEvent.VK_RIGHT];
 		DOWN = keys[KeyEvent.VK_DOWN];
 		ENTER = keys[KeyEvent.VK_ENTER];
 		SPACE = keys[KeyEvent.VK_SPACE];
+		tempCodeFix = BACKSLASH;
+		BACKSLASH = keys[KeyEvent.VK_BACK_SLASH];
 	}
 
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent arg0)
+	{
 		keys[arg0.getKeyCode()] = true;
 
 	}
 
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent arg0)
+	{
 		keys[arg0.getKeyCode()] = false;
 
 	}
 
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent arg0)
+	{
 		// ODO Auto-generated method stub
 
 	}

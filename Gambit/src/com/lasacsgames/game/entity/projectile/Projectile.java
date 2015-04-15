@@ -2,7 +2,6 @@ package com.lasacsgames.game.entity.projectile;
 
 import com.lasacsgames.game.entity.Entity;
 import com.lasacsgames.game.entity.mob.Mob;
-import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.physics.Vector;
 
@@ -20,23 +19,7 @@ public abstract class Projectile extends Entity
 		level = owner.level;
 		location = owner.location.clone();
 		vector = new Vector();
-
-		if (owner.dir == 0)
-		{
-			vector.y = -speed;
-		}
-		if (owner.dir == 1)
-		{
-			vector.x = speed;
-		}
-		if (owner.dir == 2)
-		{
-			vector.y = speed;
-		}
-		if (owner.dir == 3)
-		{
-			vector.x = -speed;
-		}
+		chooseDirection();
 		vector.add(owner.vector);
 
 	}
@@ -46,42 +29,28 @@ public abstract class Projectile extends Entity
 		if (isRemoved()) return;
 		move();
 		if (collision()) remove();
-
-	}
-
-	public void render(Screen screen)
-	{
-
 	}
 
 	public void move()
 	{
 		location.x += vector.x;
 		location.y += vector.y;
-
 	}
 
 	public void respawn()
 	{
 		location = owner.location.clone();
 		vector = new Vector();
-		if (owner.dir == 0)
-		{
-			vector.y = -speed;
-		}
-		if (owner.dir == 1)
-		{
-			vector.x = speed;
-		}
-		if (owner.dir == 2)
-		{
-			vector.y = speed;
-		}
-		if (owner.dir == 3)
-		{
-			vector.x = -speed;
-		}
+		chooseDirection();
 		recreate();
+	}
+
+	public void chooseDirection()
+	{
+		if (owner.dir == 0) vector.y = -speed;
+		if (owner.dir == 1) vector.x = speed;
+		if (owner.dir == 2) vector.y = speed;
+		if (owner.dir == 3) vector.x = -speed;
 	}
 
 	public boolean collision()
@@ -90,11 +59,10 @@ public abstract class Projectile extends Entity
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
-			int x = (i / 2) * 7;
-			int y = (i % 2) * 7;
-			if (level.getTile((((int) (location.x - 4 + x)) >> 4), (((int) (location.y - 4 + y) >> 4))).solid()) b = true;
+			int x = (i / 2) * 3;
+			int y = (i % 2) * 3;
+			if (level.getTile((((int) (location.x - 2 + x)) >> 4), (((int) (location.y - 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
-
 	}
 }

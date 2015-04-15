@@ -3,6 +3,7 @@ package com.lasacsgames.game.entity;
 import java.awt.Dimension;
 import java.util.Random;
 
+import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.level.Level;
 import com.lasacsgames.game.physics.Point;
 import com.lasacsgames.game.physics.Vector;
@@ -28,7 +29,7 @@ public abstract class Entity
 	{
 	}
 
-	public void render()
+	public void render(Screen screen)
 	{
 	}
 
