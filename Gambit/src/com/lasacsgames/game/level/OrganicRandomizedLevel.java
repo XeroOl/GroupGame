@@ -34,7 +34,6 @@ public class OrganicRandomizedLevel extends RandomizedLevel
 		branch(x, y, width, 1);
 		branch(x, y, width, 2);
 		branch(x, y, width, 3);
-		explode(x, y, 100);
 		removeWalls(ROCK_ID, GRASS_ID, 3.0, 2);
 		removeWalls(ROCK_ID, GRASS_ID, 1.0, 1);
 		removeWalls(GRASS_ID, ROCK_ID, 7.0, 0);
