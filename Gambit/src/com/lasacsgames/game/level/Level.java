@@ -84,9 +84,9 @@ public abstract class Level {
 		case VOID_ID:
 			return Tile.VOID_TILE;
 		case GRASS_ID:
-			return Tile.GRASS_TILE;
+			return Tile.GRASS_TILE[variation[x][y]];
 		case ROCK_ID:
-			return Tile.ROCK_TILE[variation[x][y]];
+			return Tile.ROCK_TILE;
 		case BRICK_ID:
 			return Tile.BRICK_TILE;
 		default:

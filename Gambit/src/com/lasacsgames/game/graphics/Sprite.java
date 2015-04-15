@@ -10,22 +10,10 @@ public class Sprite
 	 * 0 - center 1 - 8 edges, starting with up 9 - 12 inner corner, bottom
 	 * left, bottom right, top left, top right, 13- lone rock
 	 */
-	public static Sprite GRASS_SPRITE = new Sprite(16, 0, 0, SpriteSheet.tiles);
-	public static Sprite VOID_SPRITE = new Sprite(16, 3, 0, SpriteSheet.tiles);
-	public static Sprite[] ROCK_SPRITE = rockSprites();
-
-	protected static Sprite[] rockSprites()
-	{
-		Sprite[] m = new Sprite[256];
-		for (int i = 0; i < 16; i++)
-		{
-			for (int h = 0; h < 16; h++)
-			{
-				m[i + 16 * h] = new Sprite(16, i, h, SpriteSheet.rocks);
-			}
-		}
-		return m;
-	}
+	public static Sprite GRASS_SPRITE[] =
+	{ new Sprite(16, 0, 0, SpriteSheet.tiles), new Sprite(16, 5, 0, SpriteSheet.tiles), new Sprite(16, 6, 0, SpriteSheet.tiles), new Sprite(16, 7, 0, SpriteSheet.tiles), new Sprite(16, 8, 0, SpriteSheet.tiles), new Sprite(16, 9, 0, SpriteSheet.tiles), new Sprite(16, 10, 0, SpriteSheet.tiles) };
+	public static Sprite VOID_SPRITE = new Sprite(16,0xffffffff);
+	public static Sprite ROCK_SPRITE = new Sprite(16, 0xffffffff);
 
 	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
 

@@ -47,7 +47,6 @@ public class Game extends Canvas implements Runnable
 		setPreferredSize(size);
 
 		level = new OrganicRandomizedLevel(64, 64);
-
 		screen = new Screen(width, height);
 		state = new MenuState();
 
