@@ -1,20 +1,15 @@
 package com.lasacsgames.game.entity.mob;
 
-import java.awt.Dimension;
-
 import com.lasacsgames.game.entity.projectile.Pellet;
 import com.lasacsgames.game.entity.projectile.Projectile;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.level.Level;
-import com.lasacsgames.game.physics.Point;
-import com.lasacsgames.game.physics.Vector;
 
 public class Player extends Mob
 {
 	public Keyboard input;
-	private Sprite sprite;
 	private boolean walking = false;
 	private int anim = 0;
 	private int recoil = 0;
@@ -22,59 +17,47 @@ public class Player extends Mob
 
 	public Player(Keyboard input, Level level)
 	{
-		location = new Point(0, 0);
+		super(level);
 		this.input = input;
-		this.level = level;
 		sprite = Sprite.player_forward;
-		size = new Dimension(2, 2);
-		vector = new Vector(0, 0);
+		setSize(2, 2);
 		bullets = new Projectile[10];
 		for (int i = 0; i < bullets.length; i++)
 		{
 			bullets[i] = new Pellet(this, 2);
 			bullets[i].remove();
 		}
-
 	}
 
 	public Player(int x, int y, Keyboard input, Level level)
 	{
-		this.location = new Point(x, y);
-		vector = new Vector(0, 0);
-		this.input = input;
-		this.level = level;
-		sprite = Sprite.player_forward;
-		bullets = new Projectile[10];
-		for (int i = 0; i < bullets.length; i++)
-		{
-			bullets[i] = new Pellet(this, 2);
-			bullets[i].remove();
-		}
+		this(input, level);
+		setLocation(x, y);
 	}
 
 	public void update()
 	{
 		vector.x = 0;
 		vector.y = 0;
-		if (anim < 7500) anim++;
+		if (anim < 7500)
+			anim++;
 		else
 			anim = 0;
 		if (input.UP) vector.y--;
 		if (input.DOWN) vector.y++;
 		if (input.LEFT) vector.x--;
 		if (input.RIGHT) vector.x++;
-		if(input.BACKSLASH && !input.tempCodeFix) collidable = !collidable;
+		if (input.BACKSLASH && !input.tempCodeFix) collidable = !collidable;
 
-		if (moveable && vector.x != 0 || vector.y != 0)
+		if (moveable && (vector.x != 0 || vector.y != 0))
 		{
-			if(!collidable) vector.multiply(3.0);
+			if (!collidable) vector.multiply(3.0);
 			move();
 			walking = true;
-		} else
+		}
+		else
 			walking = false;
-		if (recoil > 0) recoil--;
-		if (input.SPACE && recoil == 0) shoot();
-		updateBullets();
+		handleShooting();
 	}
 
 	public void render(Screen screen)
@@ -88,7 +71,8 @@ public class Player extends Mob
 				if (anim % 20 > 10)
 				{
 					sprite = Sprite.player_forward_1;
-				} else
+				}
+				else
 					sprite = Sprite.player_forward_2;
 			}
 		}
@@ -100,7 +84,8 @@ public class Player extends Mob
 				if (anim % 20 > 10)
 				{
 					sprite = Sprite.player_side_1;
-				} else
+				}
+				else
 					sprite = Sprite.player_side_2;
 			}
 		}
@@ -112,7 +97,8 @@ public class Player extends Mob
 				if (anim % 20 > 10)
 				{
 					sprite = Sprite.player_backward_1;
-				} else
+				}
+				else
 					sprite = Sprite.player_backward_2;
 			}
 		}
@@ -137,8 +123,10 @@ public class Player extends Mob
 		}
 	}
 
-	public void updateBullets()
+	public void handleShooting()
 	{
+		if (recoil > 0) recoil--;
+		if (input.SPACE && recoil == 0) shoot();
 		for (int i = 0; i < bullets.length; i++)
 		{
 			if (!bullets[i].isRemoved()) bullets[i].update();
@@ -166,5 +154,4 @@ public class Player extends Mob
 		}
 		return b;
 	}
-
 }
