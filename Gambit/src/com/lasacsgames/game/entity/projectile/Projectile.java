@@ -3,6 +3,7 @@ package com.lasacsgames.game.entity.projectile;
 import com.lasacsgames.game.entity.Entity;
 import com.lasacsgames.game.entity.mob.Mob;
 import com.lasacsgames.game.graphics.Sprite;
+import com.lasacsgames.game.physics.Point;
 import com.lasacsgames.game.physics.Vector;
 
 public abstract class Projectile extends Entity
@@ -10,9 +11,9 @@ public abstract class Projectile extends Entity
 
 	private Mob owner;
 	protected Sprite sprite;
-	int speed;
+	double speed;
 
-	public Projectile(Mob owner, int speed)
+	public Projectile(Mob owner, double speed)
 	{
 		this.speed = speed;
 		this.owner = owner;
@@ -47,6 +48,7 @@ public abstract class Projectile extends Entity
 
 	public void chooseDirection()
 	{
+
 		if (owner.dir == 0) vector.y = -speed;
 		if (owner.dir == 1) vector.x = speed;
 		if (owner.dir == 2) vector.y = speed;
@@ -64,5 +66,15 @@ public abstract class Projectile extends Entity
 			if (level.getTile((((int) (location.x - 2 + x)) >> 4), (((int) (location.y - 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
+	}
+
+	public void respawn(Point target)
+	{
+		location = owner.location.clone();
+		vector = location.towards(target,speed);
+
+		
+		recreate();
+		
 	}
 }

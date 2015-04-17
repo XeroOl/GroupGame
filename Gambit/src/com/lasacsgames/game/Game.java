@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import com.lasacsgames.game.entity.mob.Player;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
+import com.lasacsgames.game.input.Mouse;
 import com.lasacsgames.game.level.Level;
 import com.lasacsgames.game.level.OrganicRandomizedLevel;
 import com.lasacsgames.game.state.GameState;
@@ -31,6 +32,7 @@ public class Game extends Canvas implements Runnable
 	private Level level;
 
 	private Keyboard key;
+	private Mouse mouse;
 	private Screen screen;
 
 	private GameState state;
@@ -51,11 +53,14 @@ public class Game extends Canvas implements Runnable
 		state = new MenuState();
 
 		key = new Keyboard();
-
-		player = new Player(0, 0, key, level);
+		mouse = new Mouse(screen,scale);
+		
+		player = new Player(key, mouse, level);
 		player.spawnRandomly();
 
 		addKeyListener(key);
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
 	}
 
 	public void start()
@@ -151,7 +156,6 @@ public class Game extends Canvas implements Runnable
 	{
 
 		Game game = new Game();
-
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.add(game);
 		game.frame.pack();

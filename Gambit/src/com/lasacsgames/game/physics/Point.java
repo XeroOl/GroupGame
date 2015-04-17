@@ -3,7 +3,7 @@ package com.lasacsgames.game.physics;
 public class Point
 {
 
-	public int x, y;
+	public double x, y;
 
 	public Point()
 	{
@@ -11,10 +11,16 @@ public class Point
 		y = 0;
 	}
 
-	public Point(int x, int y)
+	public Point(double x, double y)
 	{
 		this.x = x;
 		this.y = y;
+	}
+
+	// Takes an actual Point and makes a point out of it
+	public Point(java.awt.Point pos)
+	{
+		this((int)pos.getX(),(int)pos.getY());
 	}
 
 	public static Point add(Point p1, Point p2)
@@ -43,4 +49,11 @@ public class Point
 	{
 		return new Point(x, y);
 	}
+	public Vector towards(Point p,double speed){
+		Vector v = new Vector(p.x-x,p.y-y);
+		v.multiply(speed/v.length());
+		return v;
+	}
+	
+	
 }

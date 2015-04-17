@@ -5,7 +5,7 @@ public class Vector
 
 	public double x, y;
 
-	public Vector(int x, int y)
+	public Vector(double x, double y)
 	{
 		this.x = x;
 		this.y = y;
@@ -27,5 +27,8 @@ public class Vector
 	{
 		this.x *= factor;
 		this.y *= factor;
+	}
+	public double length(){
+		return java.awt.Point.distance(0, 0, x, y);
 	}
 }

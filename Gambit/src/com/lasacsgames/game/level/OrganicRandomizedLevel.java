@@ -176,62 +176,12 @@ public class OrganicRandomizedLevel extends RandomizedLevel
 			if (r.nextInt(60) == 0)
 			{
 
-				explode(x, y, r.nextInt(50) + 30);
+				explode(x, y, r.nextDouble()*3);
 			}
 		}
 	}
 
-	public void explode(int x, int y, int scale)
-	{
-		for (int dist = 0; dist < scale / 10; dist++)
-		{
-			for (int x1 = x - dist; x1 < x + dist; x1++)
-			{
-				for (int y1 = y - dist; y1 < y + dist; y1++)
-				{
-					if (r.nextInt(scale / 10) >= dist)
-					{
-						setTile(x1, y1, GRASS_ID);
-					}
-				}
-			}
-		}
-	}
+	
 
-	public void fixTextures()
-	{
-		for (int x = 1; x < width - 1; x++)
-			for (int y = 1; y < height - 1; y++)
-			{
 
-				if (tiles[x][y] == GRASS_ID)
-				{
-
-					if (tiles[x - 1][y] == ROCK_ID && tiles[x - 1][y - 1] == ROCK_ID && tiles[x][y - 1] == GRASS_ID)
-					{
-						variation[x][y] = 1;
-					}
-					if (tiles[x - 1][y] == ROCK_ID && tiles[x - 1][y - 1] == GRASS_ID && tiles[x][y - 1] == GRASS_ID)
-					{
-						variation[x][y] = 2;
-					}
-					if (tiles[x - 1][y] == ROCK_ID && tiles[x][y - 1] == ROCK_ID)
-					{
-						variation[x][y] = 3;
-					}
-					if (tiles[x - 1][y] == GRASS_ID && tiles[x - 1][y - 1] == ROCK_ID && tiles[x][y - 1] == ROCK_ID)
-					{
-						variation[x][y] = 4;
-					}
-					if (tiles[x - 1][y] == GRASS_ID && tiles[x - 1][y - 1] == GRASS_ID && tiles[x][y - 1] == ROCK_ID)
-					{
-						variation[x][y] = 5;
-					}
-					if (tiles[x - 1][y] == GRASS_ID && tiles[x - 1][y - 1] == ROCK_ID && tiles[x][y - 1] == GRASS_ID)
-					{
-						variation[x][y] = 6;
-					}
-				}
-			}
-	}
 }
