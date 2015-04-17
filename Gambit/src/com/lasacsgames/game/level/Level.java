@@ -53,7 +53,7 @@ public abstract class Level
 	{
 		for(int x1 =(int) (x-scale);x1<=x+scale;x1++){
 			for(int y1=(int)(y-scale);y1<=y+scale;y1++){
-				if(Math.pow(x-x1, 2)+Math.pow(y-y1,2)<Math.pow(scale,2)*(0.9+r.nextDouble()/5))
+				if(Math.pow(x-x1, 2)+Math.pow(y-y1,2)<Math.pow(scale,2)/(getTile(x1,y1).blastResistance+r.nextDouble()/8))
 					setTile(x1,y1,GRASS_ID);
 			}
 		}

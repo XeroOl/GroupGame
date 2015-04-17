@@ -8,6 +8,7 @@ public class BrickTile extends Tile
 	public BrickTile(Sprite sprite)
 	{
 		super(sprite);
+		blastResistance=3;
 	}
 	
 	public boolean solid()
