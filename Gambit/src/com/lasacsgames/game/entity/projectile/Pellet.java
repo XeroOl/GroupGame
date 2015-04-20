@@ -12,13 +12,14 @@ public class Pellet extends Projectile
 		super(owner, speed);
 		sprite = Sprite.bullet;
 	}
-public void remove(){
-	super.remove();
-	
-	
-}
+
+	public void remove()
+	{
+		super.remove();
+	}
+
 	public void render(Screen screen)
 	{
-		if(drawable) screen.renderEntity((int)location.x - 8, (int)location.y - 8, sprite);
+		if (drawable) screen.renderEntity((int) location.x - 8, (int) location.y - 8, sprite);
 	}
 }
