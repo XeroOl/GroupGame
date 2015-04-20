@@ -1,7 +1,7 @@
 package com.lasacsgames.game.entity.mob;
 
-import com.lasacsgames.game.entity.projectile.Grenade;
-import com.lasacsgames.game.entity.projectile.Projectile;
+import com.lasacsgames.game.entity.weapon.Rifle;
+import com.lasacsgames.game.entity.weapon.Weapon;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.input.Keyboard;
@@ -10,25 +10,19 @@ import com.lasacsgames.game.level.Level;
 
 public class Player extends Mob
 {
-	public Keyboard input;
-	public Mouse inputt;// this is really dumb
+	private Keyboard key;
+	private Mouse mouse;
+	private Weapon weapon;
 	private boolean walking = false;
 	private int anim = 0;
-	private int recoil = 0;
-	private Projectile[] bullets;
 
 	public Player(Keyboard input, Level level)
 	{
 		super(level);
-		this.input = input;
+		this.key = input;
 		sprite = Sprite.player_forward;
 		setSize(2, 2);
-		bullets = new Projectile[10];
-		for (int i = 0; i < bullets.length; i++)
-		{
-			bullets[i] = new Grenade(this, 0.8);
-			bullets[i].remove();
-		}
+		weapon = new Rifle(this);
 	}
 
 	public Player(int x, int y, Keyboard input, Level level)
@@ -41,7 +35,7 @@ public class Player extends Mob
 
 	{
 		this(input, level);
-		this.inputt = inputt;
+		this.mouse = inputt;
 	}
 
 	public void update()
@@ -52,11 +46,12 @@ public class Player extends Mob
 			anim++;
 		else
 			anim = 0;
-		if (input.UP) vector.y--;
-		if (input.DOWN) vector.y++;
-		if (input.LEFT) vector.x--;
-		if (input.RIGHT) vector.x++;
-		if (input.BACKSLASH && !input.tempCodeFix) collidable = !collidable;
+		if (key.UP) vector.y--;
+		if (key.DOWN) vector.y++;
+		if (key.LEFT) vector.x--;
+		if (key.RIGHT) vector.x++;
+		if (key.BACKSLASH && !key.tempCodeFix) collidable = !collidable;
+		if (mouse.mouse[1]) weapon.shoot(mouse.getLocation());
 
 		if (moveable && (vector.x != 0 || vector.y != 0))
 		{
@@ -66,7 +61,7 @@ public class Player extends Mob
 		}
 		else
 			walking = false;
-		handleShooting();
+		weapon.update();
 	}
 
 	public void render(Screen screen)
@@ -112,34 +107,8 @@ public class Player extends Mob
 			}
 		}
 		if (dir == 3) flip = 1;
-		if (drawable) screen.renderPlayer((int)location.x - 16, (int)location.y - 16, sprite, flip);
-		for (int i = 0; i < bullets.length; i++)
-		{
-			if (!bullets[i].isRemoved()) bullets[i].render(screen);
-		}
-	}
-
-	public void shoot()
-	{
-		for (int i = 0; i < bullets.length; i++)
-		{
-			if (bullets[i].isRemoved())
-			{
-				bullets[i].respawn(inputt.getLocation());
-				recoil = 15;
-				return;
-			}
-		}
-	}
-
-	public void handleShooting()
-	{
-		if (recoil > 0) recoil--;
-		if (inputt.mouse[1] && recoil == 0) shoot();
-		for (int i = 0; i < bullets.length; i++)
-		{
-			if (!bullets[i].isRemoved()) bullets[i].update();
-		}
+		if (drawable) screen.renderPlayer((int) location.x - 16, (int) location.y - 16, sprite, flip);
+		weapon.render(screen);
 	}
 
 	public void spawnRandomly()

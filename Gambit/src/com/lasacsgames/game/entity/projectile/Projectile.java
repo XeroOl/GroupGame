@@ -46,6 +46,14 @@ public abstract class Projectile extends Entity
 		recreate();
 	}
 
+	public void respawn(Point target)
+	{
+		location = owner.location.clone();
+		vector = location.towards(target, speed);
+
+		recreate();
+	}
+
 	public void chooseDirection()
 	{
 
@@ -66,15 +74,5 @@ public abstract class Projectile extends Entity
 			if (level.getTile((((int) (location.x - 2 + x)) >> 4), (((int) (location.y - 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
-	}
-
-	public void respawn(Point target)
-	{
-		location = owner.location.clone();
-		vector = location.towards(target,speed);
-
-		
-		recreate();
-		
 	}
 }
