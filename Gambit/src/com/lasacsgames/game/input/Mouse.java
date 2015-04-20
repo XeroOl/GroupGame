@@ -11,13 +11,14 @@ import com.lasacsgames.game.physics.Point;
 public class Mouse implements MouseMotionListener, MouseListener
 {
 	public boolean mouse[] = new boolean[4];
-	public Point location;
+	private Point location;
 	public int scale;
 public Screen screen;
 	
 	public Mouse(Screen s,int scale){
 	this.scale = scale;
 		screen = s;
+		location = new Point(10,10);
 	}
 	public Point getLocation()
 	{

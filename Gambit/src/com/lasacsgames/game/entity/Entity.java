@@ -11,7 +11,7 @@ import com.lasacsgames.game.physics.Vector;
 public abstract class Entity
 {
 
-	public Point location;
+	protected Point location;
 	public Vector vector;
 	public Level level;
 	protected final Random random = new Random();
@@ -25,13 +25,9 @@ public abstract class Entity
 	protected boolean collidable = true;
 	public int dir = 0;
 
-	public void update()
-	{
-	}
+	public abstract void update();
+	public abstract void render(Screen screen);
 
-	public void render(Screen screen)
-	{
-	}
 
 	public void remove()
 	{
@@ -47,5 +43,15 @@ public abstract class Entity
 	public boolean isRemoved()
 	{
 		return removed;
+	}
+
+	public Point getLocation()
+	{
+		return location;
+	}
+
+	public void setLocation(Point location)
+	{
+		this.location = location;
 	}
 }

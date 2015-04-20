@@ -18,7 +18,7 @@ public abstract class Projectile extends Entity
 		this.speed = speed;
 		this.owner = owner;
 		level = owner.level;
-		location = owner.location.clone();
+		location = owner.getLocation().clone();
 		vector = new Vector();
 		chooseDirection();
 		vector.add(owner.vector);
@@ -40,7 +40,7 @@ public abstract class Projectile extends Entity
 
 	public void respawn()
 	{
-		location = owner.location.clone();
+		location = owner.getLocation().clone();
 		vector = new Vector();
 		chooseDirection();
 		recreate();
@@ -70,7 +70,7 @@ public abstract class Projectile extends Entity
 
 	public void respawn(Point target)
 	{
-		location = owner.location.clone();
+		location = owner.getLocation().clone();
 		vector = location.towards(target,speed);
 
 		

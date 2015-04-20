@@ -17,4 +17,11 @@ public class GhostEnemy extends Mob
 	{
 		if (drawable) screen.renderEntity((int)location.x - 8, (int)location.y - 8, Sprite.ghost);
 	}
+
+	@Override
+	public void update()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -10,6 +10,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.lasacsgames.game.entity.mob.Player;
+import com.lasacsgames.game.entity.particle.CrossHair;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.input.Mouse;
@@ -30,11 +31,12 @@ public class Game extends Canvas implements Runnable
 
 	private Player player;
 	private Level level;
-
+	
 	private Keyboard key;
 	private Mouse mouse;
 	private Screen screen;
-
+	private CrossHair cursor;
+	
 	private GameState state;
 	private JFrame frame;
 	private Thread thread;
@@ -51,9 +53,9 @@ public class Game extends Canvas implements Runnable
 		level = new OrganicRandomizedLevel(64, 64);
 		screen = new Screen(width, height);
 		state = new MenuState();
-
 		key = new Keyboard();
 		mouse = new Mouse(screen,scale);
+		cursor = new CrossHair(mouse);
 		
 		player = new Player(key, mouse, level);
 		player.spawnRandomly();
@@ -136,11 +138,11 @@ public class Game extends Canvas implements Runnable
 		}
 
 		screen.clear();
-		int xScroll = (int) player.location.x - screen.width / 2;
-		int yScroll = (int) player.location.y - screen.height / 2;
+		int xScroll = (int) player.getLocation().x - screen.width / 2;
+		int yScroll = (int) player.getLocation().y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
-
+		cursor.render(screen);
 		for (int i = 0; i < pixels.length; i++)
 		{
 			pixels[i] = screen.pixels[i];
@@ -163,7 +165,9 @@ public class Game extends Canvas implements Runnable
 		game.frame.setTitle(title);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setVisible(true);
-
+		game.frame.setCursor(game.frame.getToolkit().createCustomCursor(
+	            new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0),
+	            "null"));
 		game.start();
 	}
 

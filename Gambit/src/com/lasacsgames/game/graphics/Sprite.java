@@ -12,11 +12,12 @@ public class Sprite
 	 */
 	public static Sprite GRASS_SPRITE[] =
 	{ new Sprite(16, 0, 0, SpriteSheet.tiles), new Sprite(16, 5, 0, SpriteSheet.tiles), new Sprite(16, 6, 0, SpriteSheet.tiles), new Sprite(16, 7, 0, SpriteSheet.tiles), new Sprite(16, 8, 0, SpriteSheet.tiles), new Sprite(16, 9, 0, SpriteSheet.tiles), new Sprite(16, 10, 0, SpriteSheet.tiles) };
-	public static Sprite VOID_SPRITE = new Sprite(16,0xffffffff);
+	public static Sprite VOID_SPRITE = new Sprite(16, 0xffffffff);
 	public static Sprite ROCK_SPRITE = new Sprite(16, 0xffffffff);
 
 	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
 
+	public static Sprite CROSSHAIR_SPRITE = new Sprite(16, 0, 1, SpriteSheet.tiles);
 	public static Sprite player_forward = new Sprite(32, 0, 5, SpriteSheet.tiles);
 	public static Sprite player_side = new Sprite(32, 1, 5, SpriteSheet.tiles);
 	public static Sprite player_backward = new Sprite(32, 2, 5, SpriteSheet.tiles);
