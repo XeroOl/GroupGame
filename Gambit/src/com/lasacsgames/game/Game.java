@@ -49,7 +49,6 @@ public class Game extends Canvas implements Runnable
 		frame = new JFrame();
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
-
 		level = new OrganicRandomizedLevel(64, 64);
 		screen = new Screen(width, height);
 		state = new MenuState();
@@ -137,18 +136,8 @@ public class Game extends Canvas implements Runnable
 			return;
 		}
 
-		screen.clear();
-		int xScroll = (int) player.getLocation().x - screen.width / 2;
-		int yScroll = (int) player.getLocation().y - screen.height / 2;
-		level.render(xScroll, yScroll, screen);
-		player.render(screen);
-		cursor.render(screen);
-		for (int i = 0; i < pixels.length; i++)
-		{
-			pixels[i] = screen.pixels[i];
-		}
-
 		Graphics g = bs.getDrawGraphics();
+		screen.render(g);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.dispose();
 		bs.show();
@@ -165,9 +154,9 @@ public class Game extends Canvas implements Runnable
 		game.frame.setTitle(title);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setVisible(true);
-		game.frame.setCursor(game.frame.getToolkit().createCustomCursor(
-	            new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0),
-	            "null"));
+	//	game.frame.setCursor(game.frame.getToolkit().createCustomCursor(
+	//            new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0),
+	//            "null"));
 		game.start();
 	}
 

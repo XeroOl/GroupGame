@@ -6,6 +6,7 @@ public class Sprite
 	private int x, y;
 	public int[] pixels;
 	private SpriteSheet sheet;
+	p
 	/*
 	 * 0 - center 1 - 8 edges, starting with up 9 - 12 inner corner, bottom
 	 * left, bottom right, top left, top right, 13- lone rock

@@ -25,7 +25,7 @@ public class CrossHair extends Particle
 	public void render(Screen screen)
 	{
 		location = m.getLocation();
-		screen.renderEntity((int)(location.x-xoffset),(int)( location.y-yoffset),mySprite);
+		screen.renderEntity((location.x-xoffset),( location.y-yoffset),mySprite);
 	}
 
 }

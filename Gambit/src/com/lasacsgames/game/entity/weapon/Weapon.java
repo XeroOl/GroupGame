@@ -31,7 +31,7 @@ public abstract class Weapon extends Entity
 		bullets = new Projectile[clipMax];
 		for (int i = 0; i < bullets.length; i++)
 		{
-			bullets[i] = new Grenade(this.owner, 0.8);
+			bullets[i] = new Grenade(this.owner, 7);
 			bullets[i].remove();
 		}
 	}

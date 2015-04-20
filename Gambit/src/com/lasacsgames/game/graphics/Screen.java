@@ -1,5 +1,8 @@
 package com.lasacsgames.game.graphics;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 import com.lasacsgames.game.level.tile.Tile;
 
 public class Screen
@@ -7,7 +10,7 @@ public class Screen
 	public int[] pixels;
 	public int width, height;
 	public int xOffSet, yOffSet;
-
+public BufferedImage me;
 	public Screen(int width, int height)
 	{
 		this.width = width;
@@ -23,33 +26,23 @@ public class Screen
 		}
 	}
 
-	public void renderTile(int xp, int yp, Tile tile)
+	public void renderTile(int xp, int yp, Tile tile,Graphics g)
 	{
 		xp -= xOffSet;
 		yp -= yOffSet;
-		for (int y = 0; y < tile.sprite.SIZE; y++)
-		{
-			int ya = y + yp;
-			for (int x = 0; x < tile.sprite.SIZE; x++)
-			{
-				int xa = x + xp;
-				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
-			}
-		}
+		g.drawImage(tile.sprite., , dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer)
 	}
 
-	public void renderEntity(int xp, int yp, Sprite sprite)
+	public void renderEntity(double d, double e, Sprite sprite)
 	{
-		xp -= xOffSet;
-		yp -= yOffSet;
+		d -= xOffSet;
+		e -= yOffSet;
 		for (int y = 0; y < sprite.SIZE; y++)
 		{
-			int ya = y + yp;
+			int ya = y + e;
 			for (int x = 0; x < sprite.SIZE; x++)
 			{
-				int xa = x + xp;
+				int xa = x + d;
 
 				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
 				if (xa < 0) xa = 0;
@@ -59,18 +52,18 @@ public class Screen
 		}
 	}
 
-	public void renderPlayer(int xp, int yp, Sprite sprite, int flip)
+	public void renderPlayer(double d, double e, Sprite sprite, int flip)
 	{
-		xp -= xOffSet;
-		yp -= yOffSet;
+		d -= xOffSet;
+		e -= yOffSet;
 		for (int y = 0; y < sprite.SIZE; y++)
 		{
-			int ya = y + yp;
+			int ya = y + e;
 			int ys = y;
 			if (flip == 2 || flip == 3) ys = sprite.SIZE - 1 - y;
 			for (int x = 0; x < sprite.SIZE; x++)
 			{
-				int xa = x + xp;
+				int xa = x + d;
 				int xs = x;
 				if (flip == 1 || flip == 3) xs = sprite.SIZE - 1 - x;
 				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;

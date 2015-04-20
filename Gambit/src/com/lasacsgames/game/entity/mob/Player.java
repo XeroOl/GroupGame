@@ -107,7 +107,7 @@ public class Player extends Mob
 			}
 		}
 		if (dir == 3) flip = 1;
-		if (drawable) screen.renderPlayer((int) location.x - 16, (int) location.y - 16, sprite, flip);
+		if (drawable) screen.renderPlayer(location.x - 16,  location.y - 16, sprite, flip);
 		weapon.render(screen);
 	}
 
