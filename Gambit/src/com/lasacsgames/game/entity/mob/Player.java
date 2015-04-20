@@ -21,7 +21,7 @@ public class Player extends Mob
 		super(level);
 		this.key = input;
 		sprite = Sprite.player_forward;
-		setSize(2, 2);
+		setSize(4, 4);
 		weapon = new Rifle(this);
 	}
 
@@ -31,11 +31,10 @@ public class Player extends Mob
 		setLocation(x, y);
 	}
 
-	public Player(Keyboard input, Mouse inputt, Level level)
-
+	public Player(Keyboard input, Mouse mouse, Level level)
 	{
 		this(input, level);
-		this.mouse = inputt;
+		this.mouse = mouse;
 	}
 
 	public void update()
