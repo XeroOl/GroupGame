@@ -1,14 +1,25 @@
 package com.lasacsgames.game.level;
 
+import com.lasacsgames.game.entity.mob.GhostEnemy;
+import com.lasacsgames.game.entity.mob.Mob;
+import com.lasacsgames.game.graphics.Screen;
+
 public class OrganicRandomizedLevel extends RandomizedLevel
 {
 	int borderwidth = 2;
+	public Mob[] mobs;
 
 	public OrganicRandomizedLevel(int width, int height)
 	{
 		super(width, height);
 		borderwidth = 2;
 		generateLevel();
+		mobs = new Mob[20];
+		for (int i = 0; i < mobs.length; i++)
+		{
+			mobs[i] = new GhostEnemy(0, 0, this);
+			mobs[i].spawnRandomly();
+		}
 	}
 
 	public OrganicRandomizedLevel(int width, int height, int seed)
@@ -16,9 +27,28 @@ public class OrganicRandomizedLevel extends RandomizedLevel
 		super(width, height, seed);
 		borderwidth = 2;
 		generateLevel();
-
+		mobs = new Mob[20];
+		for (int i = 0; i < mobs.length; i++)
+		{
+			mobs[i] = new GhostEnemy(0, 0, this);
+			mobs[i].spawnRandomly();
+		}
 	}
 
+	public void update()
+	{
+		for (int i = 0; i < mobs.length; i++)
+		{
+			mobs[i].update();
+		}
+	}
+
+	public void render(int xScroll, int yScroll, Screen screen) {
+		super.render(xScroll, yScroll, screen);
+		for(int i=0;i<mobs.length;i++) {
+			mobs[i].render(screen);
+		}
+	}
 	protected void generateLevel()
 	{
 		for (int x = 0; x < width; x++)
@@ -176,12 +206,9 @@ public class OrganicRandomizedLevel extends RandomizedLevel
 			if (r.nextInt(60) == 0)
 			{
 
-				explode(x, y, r.nextDouble()*3);
+				explode(x, y, r.nextDouble() * 3);
 			}
 		}
 	}
-
-	
-
 
 }

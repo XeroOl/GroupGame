@@ -31,12 +31,12 @@ public class Game extends Canvas implements Runnable
 
 	private Player player;
 	private Level level;
-	
+
 	private Keyboard key;
 	private Mouse mouse;
 	private Screen screen;
 	private CrossHair cursor;
-	
+
 	private GameState state;
 	private JFrame frame;
 	private Thread thread;
@@ -54,9 +54,9 @@ public class Game extends Canvas implements Runnable
 		screen = new Screen(width, height);
 		state = new MenuState();
 		key = new Keyboard();
-		mouse = new Mouse(screen,scale);
+		mouse = new Mouse(screen, scale);
 		cursor = new CrossHair(mouse);
-		
+
 		player = new Player(key, mouse, level);
 		player.spawnRandomly();
 
@@ -78,7 +78,8 @@ public class Game extends Canvas implements Runnable
 		try
 		{
 			thread.join();
-		} catch (InterruptedException e)
+		}
+		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
@@ -126,6 +127,7 @@ public class Game extends Canvas implements Runnable
 		key.update();
 		state.update(this);
 		player.update();
+		level.update();
 	}
 
 	public void render()
@@ -156,7 +158,6 @@ public class Game extends Canvas implements Runnable
 
 	public static void main(String[] args)
 	{
-
 		Game game = new Game();
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.add(game);
@@ -165,9 +166,7 @@ public class Game extends Canvas implements Runnable
 		game.frame.setTitle(title);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setVisible(true);
-		game.frame.setCursor(game.frame.getToolkit().createCustomCursor(
-	            new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0),
-	            "null"));
+		game.frame.setCursor(game.frame.getToolkit().createCustomCursor(new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0), "null"));
 		game.start();
 	}
 

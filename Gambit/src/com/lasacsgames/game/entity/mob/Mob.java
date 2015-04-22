@@ -70,4 +70,13 @@ public abstract class Mob extends Entity
 	{
 		return (this.location.x - 8 <= obj.location.x + 8 && obj.location.x - 8 <= this.location.x + 8 && this.location.y - 8 <= obj.location.y + 8 && obj.location.y - 8 <= this.location.y + 8);
 	}
+
+	public void spawnRandomly()
+	{
+		while (collision(0, 0))
+		{
+			location.x = random.nextInt(level.width) * 16 + 2;
+			location.y = random.nextInt(level.height) * 16 + 2;
+		}
+	}
 }

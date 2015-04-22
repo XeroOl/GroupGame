@@ -110,15 +110,6 @@ public class Player extends Mob
 		weapon.render(screen);
 	}
 
-	public void spawnRandomly()
-	{
-		while (collision(0, 0))
-		{
-			location.x = random.nextInt(level.width) * 16 + 2;
-			location.y = random.nextInt(level.height) * 16 + 2;
-		}
-	}
-
 	public boolean collision(double xa, double ya)
 	{
 		if (!collidable) return false;
