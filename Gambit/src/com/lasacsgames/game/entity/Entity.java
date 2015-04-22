@@ -11,7 +11,7 @@ import com.lasacsgames.game.physics.Vector;
 public abstract class Entity
 {
 
-	protected Point location;
+	public Point location;
 	public Vector vector;
 	public Level level;
 	protected final Random random = new Random();

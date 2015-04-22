@@ -1,7 +1,7 @@
 package com.lasacsgames.game.entity.mob;
 
-import com.lasacsgames.game.entity.weapon.Rifle;
-import com.lasacsgames.game.entity.weapon.Weapon;
+import com.lasacsgames.game.entity.weapon.GrenadeLauncher;
+import com.lasacsgames.game.entity.weapon.Gun;
 import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.input.Keyboard;
@@ -12,7 +12,7 @@ public class Player extends Mob
 {
 	private Keyboard key;
 	private Mouse mouse;
-	private Weapon weapon;
+	private Gun weapon;
 	private boolean walking = false;
 	private int anim = 0;
 
@@ -22,7 +22,7 @@ public class Player extends Mob
 		this.key = input;
 		sprite = Sprite.player_forward;
 		setSize(4, 4);
-		weapon = new Rifle(this);
+		weapon = new GrenadeLauncher(this);
 	}
 
 	public Player(int x, int y, Keyboard input, Level level)
@@ -50,7 +50,7 @@ public class Player extends Mob
 		if (key.LEFT) vector.x--;
 		if (key.RIGHT) vector.x++;
 		if (key.BACKSLASH && !key.tempCodeFix) collidable = !collidable;
-		if (mouse.mouse[1]) weapon.shoot(mouse.getLocation());
+		if (mouse.mouse[1]) weapon.fire(mouse.getLocation());
 
 		if (moveable && (vector.x != 0 || vector.y != 0))
 		{

@@ -16,13 +16,12 @@ public class Grenade extends Projectile
 	public void remove()
 	{
 		super.remove();
-		level.explode((int) location.x / 16, (int) location.y / 16, 4.1);
+		level.explode((int) location.x / 16, (int) location.y / 16, 2.1);
 	}
 
 	public void render(Screen screen)
 	{
 		if (drawable) screen.renderEntity((int) location.x - 8, (int) location.y - 8, sprite);
-
 	}
 
 }
