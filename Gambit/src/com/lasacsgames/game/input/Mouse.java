@@ -22,7 +22,7 @@ public Screen screen;
 	}
 	public Point getLocation()
 	{
-		return new Point(location.x/scale+screen.xOffSet,location.y/scale+screen.yOffSet);
+		return new Point((location.x+screen.xOffSet)/scale,(location.y+screen.yOffSet)/scale);
 	}
 
 	@Override

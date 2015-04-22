@@ -1,8 +1,12 @@
 package com.lasacsgames.game.graphics;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
+import com.lasacsgames.game.entity.Entity;
+import com.lasacsgames.game.entity.mob.Creature;
+import com.lasacsgames.game.entity.mob.Mob;
+import com.lasacsgames.game.entity.projectile.Projectile;
+import com.lasacsgames.game.level.Level;
 import com.lasacsgames.game.level.tile.Tile;
 
 public class Screen
@@ -10,9 +14,11 @@ public class Screen
 	public int[] pixels;
 	public int width, height;
 	public int xOffSet, yOffSet;
-public BufferedImage me;
-	public Screen(int width, int height)
+	int scale;
+
+	public Screen(int width, int height, int scale)
 	{
+		this.scale = scale;
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
@@ -26,52 +32,41 @@ public BufferedImage me;
 		}
 	}
 
-	public void renderTile(int xp, int yp, Tile tile,Graphics g)
+	public void renderLevel(Level l, Graphics g)
 	{
-		xp -= xOffSet;
-		yp -= yOffSet;
-		g.drawImage(tile.sprite., , dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer)
+
+		for (int x = xOffSet / Tile.SIZE / scale - 1; x <= (xOffSet + width) / Tile.SIZE / scale; x++)
+		{
+			for (int y = yOffSet / Tile.SIZE / scale - 1; y <= (yOffSet + height) / Tile.SIZE / scale; y++)
+			{
+				g.drawImage(l.getTile(x, y).sprite.myImage, x * Tile.SIZE * scale - xOffSet, y * Tile.SIZE * scale - yOffSet, Tile.SIZE * scale, Tile.SIZE * scale, null);
+			}
+		}
+
 	}
 
-	public void renderEntity(double d, double e, Sprite sprite)
+	public void renderSprite(double x, double y, Sprite sprite, Graphics g)
 	{
-		d -= xOffSet;
-		e -= yOffSet;
-		for (int y = 0; y < sprite.SIZE; y++)
-		{
-			int ya = y + e;
-			for (int x = 0; x < sprite.SIZE; x++)
-			{
-				int xa = x + d;
+		g.drawImage(sprite.myImage, (int) ((x * scale) - xOffSet), (int) ((y * scale) - yOffSet), sprite.SIZE * scale, sprite.SIZE * scale, null);
+	}
 
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = sprite.pixels[x + y * sprite.SIZE];
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
-			}
+	public void renderEntity(Entity e, Graphics g)
+	{
+		g.drawImage(e.sprite.myImage, (int) ((e.getLocation().x * scale) - xOffSet), (int) ((e.getLocation().y * scale) - yOffSet), e.sprite.SIZE * scale, e.sprite.SIZE * scale, null);
+	}
+
+	public void renderCreature(Creature e, Graphics g)
+	{
+		renderMob(e,g);
+		for (Projectile p : e.weapon.getBullets())
+		{
+			if (!p.isRemoved()) renderEntity(p, g);
 		}
 	}
 
-	public void renderPlayer(double d, double e, Sprite sprite, int flip)
+	public void renderMob(Mob e, Graphics g)
 	{
-		d -= xOffSet;
-		e -= yOffSet;
-		for (int y = 0; y < sprite.SIZE; y++)
-		{
-			int ya = y + e;
-			int ys = y;
-			if (flip == 2 || flip == 3) ys = sprite.SIZE - 1 - y;
-			for (int x = 0; x < sprite.SIZE; x++)
-			{
-				int xa = x + d;
-				int xs = x;
-				if (flip == 1 || flip == 3) xs = sprite.SIZE - 1 - x;
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = sprite.pixels[xs + ys * sprite.SIZE];
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
-			}
-		}
+		g.drawImage(e.sprite.myImage, (int) (((e.getLocation().x-e.spriteOffset.x )* scale) - xOffSet), (int) (((e.getLocation().y-e.spriteOffset.y)* scale) - yOffSet), e.sprite.SIZE * scale, e.sprite.SIZE * scale, null);
 	}
 
 	public void setOffSet(int xOffSet, int yOffSet)

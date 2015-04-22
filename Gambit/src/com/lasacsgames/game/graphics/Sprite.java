@@ -1,20 +1,24 @@
 package com.lasacsgames.game.graphics;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 public class Sprite
 {
 	public final int SIZE;
 	private int x, y;
-	public int[] pixels;
+	public BufferedImage myImage;
 	private SpriteSheet sheet;
-	p
+
 	/*
 	 * 0 - center 1 - 8 edges, starting with up 9 - 12 inner corner, bottom
 	 * left, bottom right, top left, top right, 13- lone rock
 	 */
 	public static Sprite GRASS_SPRITE[] =
 	{ new Sprite(16, 0, 0, SpriteSheet.tiles), new Sprite(16, 5, 0, SpriteSheet.tiles), new Sprite(16, 6, 0, SpriteSheet.tiles), new Sprite(16, 7, 0, SpriteSheet.tiles), new Sprite(16, 8, 0, SpriteSheet.tiles), new Sprite(16, 9, 0, SpriteSheet.tiles), new Sprite(16, 10, 0, SpriteSheet.tiles) };
-	public static Sprite VOID_SPRITE = new Sprite(16, 0xffffffff);
-	public static Sprite ROCK_SPRITE = new Sprite(16, 0xffffffff);
+	public static Sprite VOID_SPRITE = new Sprite(16, new Color(255, 255, 255));
+	public static Sprite ROCK_SPRITE = new Sprite(16, new Color(255, 255, 255));
 
 	public static Sprite BRICK_SPRITE = new Sprite(16, 2, 0, SpriteSheet.tiles);
 
@@ -38,36 +42,31 @@ public class Sprite
 	public Sprite(int size, int x, int y, SpriteSheet sheet)
 	{
 		SIZE = size;
-		pixels = new int[SIZE * SIZE];
 		this.x = x * size;
 		this.y = y * size;
 		this.sheet = sheet;
 		load();
 	}
 
-	public Sprite(int size, int color)
+	public Sprite(int size, Color color)
 	{
 		SIZE = size;
-		pixels = new int[SIZE * SIZE];
+		this.x = x * size;
+		this.y = y * size;
+		myImage = new BufferedImage(SIZE, SIZE, BufferedImage.TYPE_4BYTE_ABGR);
 		setColor(color);
 	}
 
-	private void setColor(int color)
+	private void setColor(Color color)
 	{
-		for (int i = 0; i < SIZE * SIZE; i++)
-		{
-			pixels[i] = color;
-		}
+		Graphics g = myImage.createGraphics();
+		g.setColor(color);
+		g.fillRect(0, 0, SIZE, SIZE);
+
 	}
 
 	private void load()
 	{
-		for (int y = 0; y < SIZE; y++)
-		{
-			for (int x = 0; x < SIZE; x++)
-			{
-				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
-			}
-		}
+		myImage = sheet.myImage.getSubimage(x, y, SIZE, SIZE);
 	}
 }

@@ -3,6 +3,7 @@ package com.lasacsgames.game.entity.mob;
 import java.awt.Dimension;
 
 import com.lasacsgames.game.entity.Entity;
+import com.lasacsgames.game.entity.weapon.Weapon;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.level.Level;
 import com.lasacsgames.game.physics.Point;
@@ -10,19 +11,13 @@ import com.lasacsgames.game.physics.Vector;
 
 public abstract class Mob extends Entity
 {
-	public Sprite sprite;
-
+	public Point spriteOffset;
 	public Mob()
 	{
 		location = new Point(0, 0);
-		size = new Dimension(4, 4);
+		size = new Dimension(6, 6);
 		vector = new Vector(0, 0);
-	}
-
-	public Mob(Level level)
-	{
-		this();
-		this.level = level;
+	
 	}
 
 	protected void setLocation(int x, int y)
@@ -59,9 +54,9 @@ public abstract class Mob extends Entity
 		boolean b = false;
 		for (int i = 0; i < 4; i++)
 		{
-			int x = (i / 2) * 7;
-			int y = (i % 2) * 7;
-			if (level.getTile((((int) (location.x + xa - 4 + x)) >> 4), (((int) (location.y + ya - 4 + y) >> 4))).solid()) b = true;
+			int x = (i / 2) * (size.width-1);
+			int y = (i % 2) * (size.height-1);
+			if (level.getTile((((int) (location.x + xa - size.width/2 + x)) >> 4), (((int) (location.y + ya - size.height/2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
 	}

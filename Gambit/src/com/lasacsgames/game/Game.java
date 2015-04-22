@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		level = new OrganicRandomizedLevel(64, 64);
-		screen = new Screen(width, height);
+		screen = new Screen(width*scale, height*scale,scale);
 		state = new MenuState();
 		key = new Keyboard();
 		mouse = new Mouse(screen,scale);
@@ -66,6 +66,7 @@ public class Game extends Canvas implements Runnable
 
 	public void start()
 	{
+		requestFocus();
 		running = true;
 		thread = new Thread(this, "Display");
 		thread.start();
@@ -137,8 +138,13 @@ public class Game extends Canvas implements Runnable
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		screen.render(g);
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		screen.xOffSet=(int) (player.getLocation().x*scale-screen.width/2);
+		screen.yOffSet=(int) (player.getLocation().y*scale-screen.height/2);
+		
+		screen.renderLevel(level, g);
+		screen.renderCreature(player,g);
+		screen.renderEntity(cursor, g);
+		
 		g.dispose();
 		bs.show();
 	}
@@ -154,9 +160,9 @@ public class Game extends Canvas implements Runnable
 		game.frame.setTitle(title);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setVisible(true);
-	//	game.frame.setCursor(game.frame.getToolkit().createCustomCursor(
-	//            new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0),
-	//            "null"));
+		game.frame.setCursor(game.frame.getToolkit().createCustomCursor(
+	           new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB), new java.awt.Point(0, 0),
+	            "null"));
 		game.start();
 	}
 

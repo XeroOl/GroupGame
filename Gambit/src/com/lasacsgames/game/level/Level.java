@@ -1,5 +1,6 @@
 package com.lasacsgames.game.level;
 
+import java.awt.Graphics;
 import java.util.Random;
 
 import com.lasacsgames.game.graphics.Screen;
@@ -97,24 +98,6 @@ public abstract class Level
 					}
 				}
 			}
-	}
-
-	public void render(int xScroll, int yScroll, Screen screen)
-	{
-		screen.setOffSet(xScroll, yScroll);
-		int x0 = xScroll >> 4;
-		int x1 = (xScroll + screen.width + 16) >> 4;
-		int y0 = yScroll >> 4;
-		int y1 = (yScroll + screen.height + 16) >> 4;
-
-		for (int y = y0; y < y1; y++)
-		{
-			for (int x = x0; x < x1; x++)
-			{
-				getTile(x, y).render(x, y, screen);
-			}
-		}
-
 	}
 
 	public int getTileId(int x, int y)

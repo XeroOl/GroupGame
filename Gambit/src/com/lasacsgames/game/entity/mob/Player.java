@@ -2,26 +2,26 @@ package com.lasacsgames.game.entity.mob;
 
 import com.lasacsgames.game.entity.weapon.Rifle;
 import com.lasacsgames.game.entity.weapon.Weapon;
-import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.input.Keyboard;
 import com.lasacsgames.game.input.Mouse;
 import com.lasacsgames.game.level.Level;
+import com.lasacsgames.game.physics.Point;
 
-public class Player extends Mob
+public class Player extends Creature
 {
 	private Keyboard key;
 	private Mouse mouse;
-	private Weapon weapon;
 	private boolean walking = false;
 	private int anim = 0;
 
 	public Player(Keyboard input, Level level)
 	{
-		super(level);
+		this.level = level;
 		this.key = input;
 		sprite = Sprite.player_forward;
-		setSize(2, 2);
+		setSize(6, 6);
+		spriteOffset = new Point(16,16);
 		weapon = new Rifle(this);
 	}
 
@@ -63,54 +63,6 @@ public class Player extends Mob
 			walking = false;
 		weapon.update();
 	}
-
-	public void render(Screen screen)
-	{
-		int flip = 0;
-		if (dir == 0)
-		{
-			sprite = Sprite.player_forward;
-			if (walking)
-			{
-				if (anim % 20 > 10)
-				{
-					sprite = Sprite.player_forward_1;
-				}
-				else
-					sprite = Sprite.player_forward_2;
-			}
-		}
-		if (dir == 1 || dir == 3)
-		{
-			sprite = Sprite.player_side;
-			if (walking)
-			{
-				if (anim % 20 > 10)
-				{
-					sprite = Sprite.player_side_1;
-				}
-				else
-					sprite = Sprite.player_side_2;
-			}
-		}
-		if (dir == 2)
-		{
-			sprite = Sprite.player_backward;
-			if (walking)
-			{
-				if (anim % 20 > 10)
-				{
-					sprite = Sprite.player_backward_1;
-				}
-				else
-					sprite = Sprite.player_backward_2;
-			}
-		}
-		if (dir == 3) flip = 1;
-		if (drawable) screen.renderPlayer(location.x - 16,  location.y - 16, sprite, flip);
-		weapon.render(screen);
-	}
-
 	public void spawnRandomly()
 	{
 		while (collision(0, 0))
@@ -120,7 +72,7 @@ public class Player extends Mob
 		}
 	}
 
-	public boolean collision(double xa, double ya)
+/*	public boolean collision(double xa, double ya)
 	{
 		if (!collidable) return false;
 		boolean b = false;
@@ -131,5 +83,5 @@ public class Player extends Mob
 			if (level.getTile((((int) (location.x + xa - 2 + x)) >> 4), (((int) (location.y + ya - 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
-	}
+	}*/
 }

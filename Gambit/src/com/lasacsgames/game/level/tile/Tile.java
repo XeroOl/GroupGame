@@ -13,16 +13,13 @@ public abstract class Tile
 	public static Tile GRASS_TILE[] = {new GrassTile(Sprite.GRASS_SPRITE[0]),new GrassTile(Sprite.GRASS_SPRITE[1]),new GrassTile(Sprite.GRASS_SPRITE[2]),new GrassTile(Sprite.GRASS_SPRITE[3]),new GrassTile(Sprite.GRASS_SPRITE[4]),new GrassTile(Sprite.GRASS_SPRITE[5]),new GrassTile(Sprite.GRASS_SPRITE[6])};
 	public static Tile ROCK_TILE = new RockTile(Sprite.ROCK_SPRITE);
 	public static Tile BRICK_TILE = new BrickTile(Sprite.BRICK_SPRITE);
-
+public static int SIZE = 16;
 	public Tile(Sprite sprite)
 	{
 		this.sprite = sprite;
 	}
 
-	public void render(int x, int y, Screen screen)
-	{
-		screen.renderTile(x << 4, y << 4, this);
-	}
+
 
 	public boolean solid()
 	{

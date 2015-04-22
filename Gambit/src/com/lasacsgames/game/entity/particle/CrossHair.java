@@ -1,31 +1,27 @@
 package com.lasacsgames.game.entity.particle;
 
-import com.lasacsgames.game.graphics.Screen;
 import com.lasacsgames.game.graphics.Sprite;
 import com.lasacsgames.game.input.Mouse;
+import com.lasacsgames.game.physics.Point;
 
 public class CrossHair extends Particle
 {
 
 	Mouse m;
-	Sprite mySprite = Sprite.CROSSHAIR_SPRITE;
-	private int xoffset;
-	private int yoffset;
+
 	public CrossHair(Mouse myMouse)
 	{
-		xoffset=8;
-		yoffset=8;
 		m = myMouse;
+		sprite = Sprite.CROSSHAIR_SPRITE;
+		location = m.getLocation();
+	}
+
+	public Point getLocation()
+	{
+		return m.getLocation();
 	}
 
 	public void update()
 	{
 	}
-
-	public void render(Screen screen)
-	{
-		location = m.getLocation();
-		screen.renderEntity((location.x-xoffset),( location.y-yoffset),mySprite);
-	}
-
 }

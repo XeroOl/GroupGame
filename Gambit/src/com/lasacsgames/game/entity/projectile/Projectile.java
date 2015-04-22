@@ -10,7 +10,6 @@ public abstract class Projectile extends Entity
 {
 
 	private Mob owner;
-	protected Sprite sprite;
 	double speed;
 
 	public Projectile(Mob owner, double speed)

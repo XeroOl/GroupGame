@@ -31,7 +31,7 @@ public abstract class Weapon extends Entity
 		bullets = new Projectile[clipMax];
 		for (int i = 0; i < bullets.length; i++)
 		{
-			bullets[i] = new Grenade(this.owner, 7);
+			bullets[i] = new Grenade(this.owner, 0.2);
 			bullets[i].remove();
 		}
 	}
@@ -47,13 +47,6 @@ public abstract class Weapon extends Entity
 		}
 	}
 
-	public void render(Screen screen)
-	{
-		for (int i = 0; i < bullets.length; i++)
-		{
-			if (!bullets[i].isRemoved()) bullets[i].render(screen);
-		}
-	}
 
 	public void shoot(Point loc)
 	{
@@ -85,4 +78,7 @@ public abstract class Weapon extends Entity
 			reserve = 0;
 		}
 	}
+public Projectile[] getBullets(){
+	return bullets;
+}
 }
