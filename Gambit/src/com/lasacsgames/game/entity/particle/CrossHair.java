@@ -7,15 +7,12 @@ import com.lasacsgames.game.input.Mouse;
 public class CrossHair extends Particle
 {
 
-	Mouse m;
-	Sprite mySprite = Sprite.CROSSHAIR_SPRITE;
-	private int xoffset;
-	private int yoffset;
+	private Mouse m;
+
 	public CrossHair(Mouse myMouse)
 	{
-		xoffset=8;
-		yoffset=8;
 		m = myMouse;
+		sprite = Sprite.CROSSHAIR_SPRITE;
 	}
 
 	public void update()
@@ -25,7 +22,7 @@ public class CrossHair extends Particle
 	public void render(Screen screen)
 	{
 		location = m.getLocation();
-		screen.renderEntity((int)(location.x-xoffset),(int)( location.y-yoffset),mySprite);
+		screen.renderEntity((int) (location.x - 8), (int) (location.y - 8), sprite);
 	}
 
 }

@@ -17,7 +17,7 @@ import com.lasacsgames.game.input.Mouse;
 import com.lasacsgames.game.level.Level;
 import com.lasacsgames.game.level.OrganicRandomizedLevel;
 import com.lasacsgames.game.state.GameState;
-import com.lasacsgames.game.state.MenuState;
+import com.lasacsgames.game.state.PlayingState;
 
 public class Game extends Canvas implements Runnable
 {
@@ -29,8 +29,8 @@ public class Game extends Canvas implements Runnable
 	private static String title = "Lol what are we doin'?";
 	private static boolean running = false;
 
-	private Player player;
-	private Level level;
+	public Player player;
+	public Level level;
 
 	private Keyboard key;
 	private Mouse mouse;
@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable
 
 		level = new OrganicRandomizedLevel(64, 64);
 		screen = new Screen(width, height);
-		state = new MenuState();
+		state = new PlayingState();
 		key = new Keyboard();
 		mouse = new Mouse(screen, scale);
 		cursor = new CrossHair(mouse);
@@ -126,8 +126,6 @@ public class Game extends Canvas implements Runnable
 	{
 		key.update();
 		state.update(this);
-		player.update();
-		level.update();
 	}
 
 	public void render()

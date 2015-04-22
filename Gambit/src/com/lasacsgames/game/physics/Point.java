@@ -20,7 +20,7 @@ public class Point
 	// Takes an actual Point and makes a point out of it
 	public Point(java.awt.Point pos)
 	{
-		this((int)pos.getX(),(int)pos.getY());
+		this((int) pos.getX(), (int) pos.getY());
 	}
 
 	public static Point add(Point p1, Point p2)
@@ -49,11 +49,12 @@ public class Point
 	{
 		return new Point(x, y);
 	}
-	public Vector towards(Point p,double speed){
-		Vector v = new Vector(p.x-x,p.y-y);
-		v.multiply(speed/v.length());
+
+	public Vector towards(Point p, double speed)
+	{
+		Vector v = new Vector(p.x - x, p.y - y);
+		v.multiply(speed / v.length());
 		return v;
 	}
-	
-	
+
 }
