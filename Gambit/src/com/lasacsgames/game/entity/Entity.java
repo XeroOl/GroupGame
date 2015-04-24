@@ -20,9 +20,9 @@ public abstract class Entity
 	// Entity properties
 	private boolean removed = false;
 	public boolean drawable = true;
-	protected boolean moveable = true;
+	public boolean moveable = true;
 	protected boolean moving = false;
-	protected boolean collidable = true;
+	public boolean collidable = true;
 	public int dir = 0;
 
 	public abstract void update();
@@ -53,5 +53,18 @@ public abstract class Entity
 	public void setLocation(Point location)
 	{
 		this.location = location;
+	}
+	
+	public boolean collision(double xa, double ya)
+	{
+		if (!collidable) return false;
+		boolean b = false;
+		for (int i = 0; i < 4; i++)
+		{
+			int x = (i / 2) * (size.width - 1);
+			int y = (i % 2) * (size.height - 1);
+			if (level.getTile((((int) (location.x + xa - size.width / 2 + x)) >> 4), (((int) (location.y + ya - size.height / 2 + y) >> 4))).solid()) b = true;
+		}
+		return b;
 	}
 }

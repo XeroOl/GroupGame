@@ -53,19 +53,6 @@ public abstract class Mob extends Entity
 		}
 	}
 
-	public boolean collision(double xa, double ya)
-	{
-		if (!collidable) return false;
-		boolean b = false;
-		for (int i = 0; i < 4; i++)
-		{
-			int x = (i / 2) * 7;
-			int y = (i % 2) * 7;
-			if (level.getTile((((int) (location.x + xa - 4 + x)) >> 4), (((int) (location.y + ya - 4 + y) >> 4))).solid()) b = true;
-		}
-		return b;
-	}
-
 	public boolean aabbCollision(Mob obj)
 	{
 		return (this.location.x - 8 <= obj.location.x + 8 && obj.location.x - 8 <= this.location.x + 8 && this.location.y - 8 <= obj.location.y + 8 && obj.location.y - 8 <= this.location.y + 8);

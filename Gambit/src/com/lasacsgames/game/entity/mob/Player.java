@@ -1,5 +1,7 @@
 package com.lasacsgames.game.entity.mob;
 
+import com.lasacsgames.game.entity.component.input.InputComponent;
+import com.lasacsgames.game.entity.component.input.PlayerInputComponent;
 import com.lasacsgames.game.entity.weapon.GrenadeLauncher;
 import com.lasacsgames.game.entity.weapon.Gun;
 import com.lasacsgames.game.graphics.Screen;
@@ -10,48 +12,43 @@ import com.lasacsgames.game.level.Level;
 
 public class Player extends Mob
 {
+	private InputComponent input;
 	private Keyboard key;
 	private Mouse mouse;
 	private Gun weapon;
 	private boolean walking = false;
 	private int anim = 0;
 
-	public Player(Keyboard input, Level level)
+	public Player(Keyboard key, Level level)
 	{
 		super(level);
-		this.key = input;
+		this.key = key;
 		sprite = Sprite.player_forward;
 		setSize(4, 4);
+		this.input = new PlayerInputComponent();
 		weapon = new GrenadeLauncher(this);
 	}
 
-	public Player(int x, int y, Keyboard input, Level level)
+	public Player(int x, int y, Keyboard key, Level level)
 	{
-		this(input, level);
+		this(key, level);
 		setLocation(x, y);
 	}
 
-	public Player(Keyboard input, Mouse mouse, Level level)
+	public Player(Keyboard key, Mouse mouse, Level level)
 	{
-		this(input, level);
+		this(key, level);
 		this.mouse = mouse;
 	}
 
 	public void update()
 	{
-		vector.x = 0;
-		vector.y = 0;
+		input.update(this, key, mouse);
 		if (anim < 7500)
 			anim++;
 		else
 			anim = 0;
-		if (key.UP) vector.y--;
-		if (key.DOWN) vector.y++;
-		if (key.LEFT) vector.x--;
-		if (key.RIGHT) vector.x++;
-		if (key.BACKSLASH && !key.tempCodeFix) collidable = !collidable;
 		if (mouse.mouse[1]) weapon.fire(mouse.getLocation());
-
 		if (moveable && (vector.x != 0 || vector.y != 0))
 		{
 			if (!collidable) vector.multiply(3.0);
@@ -108,18 +105,5 @@ public class Player extends Mob
 		if (dir == 3) flip = 1;
 		if (drawable) screen.renderPlayer((int) location.x - 16, (int) location.y - 16, sprite, flip);
 		weapon.render(screen);
-	}
-
-	public boolean collision(double xa, double ya)
-	{
-		if (!collidable) return false;
-		boolean b = false;
-		for (int i = 0; i < 4; i++)
-		{
-			int x = (i / 2) * 3;
-			int y = (i % 2) * 3;
-			if (level.getTile((((int) (location.x + xa - 2 + x)) >> 4), (((int) (location.y + ya - 2 + y) >> 4))).solid()) b = true;
-		}
-		return b;
 	}
 }
