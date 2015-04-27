@@ -17,6 +17,11 @@ public class PlayerPhysicsComponent extends PhysicsComponent
 	
 	public void move(Entity ent)
 	{
+		if (ent.vector.y > 0) ent.dir = 2;
+		if (ent.vector.y < 0) ent.dir = 0;
+		if (ent.vector.x > 0) ent.dir = 1;
+		if (ent.vector.x < 0) ent.dir = 3;
+
 		if (!ent.collision(ent.vector.x, 0))
 		{
 			ent.location.x += ent.vector.x;
