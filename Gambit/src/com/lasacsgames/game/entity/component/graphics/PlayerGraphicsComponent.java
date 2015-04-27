@@ -61,7 +61,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent
 			}
 		}
 		if (ent.dir == 3) flip = 1;
-		if (ent.drawable) screen.renderPlayer((int) ent.location.x - 16, (int) ent.location.y - 16, sprite, flip);
+		if (drawable) screen.renderPlayer((int) ent.location.x - 16, (int) ent.location.y - 16, sprite, flip);
 	}
 
 }

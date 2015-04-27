@@ -7,10 +7,7 @@ import com.lasacsgames.game.graphics.Sprite;
 public abstract class GraphicsComponent
 {
 	protected Sprite sprite;
-	
-	public GraphicsComponent()
-	{
-	}
+	protected boolean drawable = true;
 
 	public abstract void update(Entity ent);
 	
