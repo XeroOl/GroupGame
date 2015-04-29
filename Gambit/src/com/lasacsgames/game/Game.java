@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable
 	private Keyboard key;
 	private Mouse mouse;
 	private Screen screen;
-	private CrossHair cursor;
+	public CrossHair cursor;
 
 	private GameState state;
 	private JFrame frame;
@@ -70,6 +70,7 @@ public class Game extends Canvas implements Runnable
 		running = true;
 		thread = new Thread(this, "Display");
 		thread.start();
+		requestFocus();
 	}
 
 	public void stop()

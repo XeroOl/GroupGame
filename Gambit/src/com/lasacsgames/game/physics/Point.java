@@ -27,7 +27,10 @@ public class Point
 	{
 		return new Point(p1.x + p2.x, p1.y + p2.y);
 	}
-
+public void add(Vector v){
+	x+=v.x;
+	y+=v.y;
+}
 	public void add(Point p)
 	{
 		x += p.x;

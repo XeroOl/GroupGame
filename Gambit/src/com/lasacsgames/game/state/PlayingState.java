@@ -13,6 +13,7 @@ public class PlayingState extends GameState
 	{
 		game.player.update();
 		game.level.update();
+		game.cursor.update();
 	}
 
 }

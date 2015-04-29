@@ -13,9 +13,8 @@ public abstract class Projectile extends Entity
 	protected Sprite sprite;
 	double speed;
 
-	public Projectile(Mob owner, double speed)
+	public Projectile(Mob owner)
 	{
-		this.speed = speed;
 		this.owner = owner;
 		level = owner.level;
 		location = owner.getLocation().clone();
@@ -37,7 +36,7 @@ public abstract class Projectile extends Entity
 		location.x += vector.x;
 		location.y += vector.y;
 	}
-
+	@Deprecated
 	public void respawn()
 	{
 		location = owner.getLocation().clone();
@@ -45,7 +44,7 @@ public abstract class Projectile extends Entity
 		chooseDirection();
 		recreate();
 	}
-
+@Deprecated
 	public void chooseDirection()
 	{
 

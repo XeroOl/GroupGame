@@ -13,7 +13,7 @@ public class GrenadeLauncher extends Gun
 		bullets = new Projectile[clipMax];
 		for (int i = 0; i < bullets.length; i++)
 		{
-			bullets[i] = new Grenade(this.owner, 1.0);
+			bullets[i] = new Grenade(this.owner);
 			bullets[i].remove();
 		}
 	}

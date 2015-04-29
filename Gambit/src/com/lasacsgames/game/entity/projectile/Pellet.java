@@ -7,9 +7,10 @@ import com.lasacsgames.game.graphics.Sprite;
 public class Pellet extends Projectile
 {
 
-	public Pellet(Mob owner, int speed)
+	public Pellet(Mob owner)
 	{
-		super(owner, speed);
+		super(owner);
+		speed=2;
 		sprite = Sprite.bullet;
 	}
 

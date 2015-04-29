@@ -26,7 +26,7 @@ public abstract class Gun extends Weapon
 		bullets = new Projectile[clipMax];
 		for (int i = 0; i < bullets.length; i++)
 		{
-			bullets[i] = new Grenade(this.owner, 0.8);
+			bullets[i] = new Grenade(this.owner);
 			bullets[i].remove();
 		}
 	}
