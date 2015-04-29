@@ -14,7 +14,7 @@ public abstract class Entity
 	public Point location;
 	public Vector vector;
 	public Level level;
-	protected final Random random = new Random();
+	public final Random random = new Random();
 	public Dimension size;
 
 	// Entity properties
@@ -66,5 +66,22 @@ public abstract class Entity
 			if (level.getTile((((int) (location.x + xa - size.width / 2 + x)) >> 4), (((int) (location.y + ya - size.height / 2 + y) >> 4))).solid()) b = true;
 		}
 		return b;
+	}
+	
+	public void move()
+	{
+		if (vector.y > 0) dir = 2;
+		if (vector.y < 0) dir = 0;
+		if (vector.x > 0) dir = 1;
+		if (vector.x < 0) dir = 3;
+
+		if (!collision(vector.x, 0))
+		{
+			location.x += vector.x;
+		}
+		if (!collision(0, vector.y))
+		{
+			location.y += vector.y;
+		}
 	}
 }
